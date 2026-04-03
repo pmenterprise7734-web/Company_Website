@@ -3,10 +3,11 @@ import { storage } from "../firebase"
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import {TextField, Modal, Switch} from '@mui/material'
 import { ImagePlus, Eye, EyeOff } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 
 
-export default function EditCatagories() {
+export default function ViewAllCatagories() {
 
     const [Reload, setReload] = useState(false);
 
@@ -20,7 +21,7 @@ export default function EditCatagories() {
 
     const[AddModal, setAddModal] = useState(false)
     const handleOpen = () => {setAddModal(true)}
-    const handleClose = () => {setAddModal(false); setPreviewImg("")}
+    const handleClose = () => {setAddModal(false); setPreviewImg(""); setCatagoryValue("")}
 
     const[CatagoryVisibleModal, setCatagoryVisibleModal] = useState(false)
     const[CurrentSelectedCatagory, setCurrentSelectedCatagory] = useState("")
@@ -146,7 +147,10 @@ export default function EditCatagories() {
     <div className='flex flex-col min-h-screen w-full'>
         <div className='flex flex-row justify-between'>
             <p className='text-3xl text-[#FFF] mx-10 px-10 py-2 bg-[#17b02b] my-10 rounded-[10px] '>Catagories</p>
-            <div className='flex h-[60px] w-[250px] bg-[#000] mx-10 px-10 py-2 my-10 justify-center items-center cursor-pointer' onClick={handleOpen}><p className='text-[#FFF]'>+ Add Catagory</p></div>
+            <div className='flex flex-row my-10'>
+                <div className='flex h-[60px] w-[200px] bg-[#000] mx-5 justify-center items-center cursor-pointer hover:scale-[1.1] active:scale-[0.9] duration-200 rounded-[10px]' onClick={handleOpen}><p className='text-[#FFF]'>+ Add Catagory</p></div>
+                <Link to={"/AdminAddProduct"} className='flex h-[60px] w-[250px] bg-[#000] mx-5 justify-center items-center cursor-pointer hover:scale-[1.1] active:scale-[0.9] duration-200 rounded-[10px]' onClick={''}><p className='text-[#FFF]'>+ Add Product</p></Link>
+            </div>
         </div>
         <div className='flex flex-row flex-wrap min-h-screen w-full px-8 py-5 justify-around'>
             {
@@ -154,8 +158,8 @@ export default function EditCatagories() {
                     AllCatagory.map((item) => {
                         return(
                             <div key={item._id} className='flex flex-col items-center my-5'>
-                                <div className="flex h-[300px] w-[320px] rounded-[20px] bg-center bg-cover justify-end" style={{ backgroundImage: `url(${item.picture})` }}>
-                                    <div className='flex flex-row w-[15%] h-[15%] bg-[#000] m-5 rounded-[20px] justify-center items-center cursor-pointer hover:scale-[1.2] duration-200' 
+                                <div className="flex h-[300px] w-[320px] rounded-[20px] bg-center my-5 bg-cover justify-end cursor-pointer hover:scale-[1.1] duration-200 active:scale-[1]" style={{ backgroundImage: `url(${item.picture})` }}>
+                                    <div className='flex flex-row w-[15%] h-[15%] bg-[#000] m-5 rounded-[20px] justify-center items-center cursor-pointer hover:scale-[1.2] duration-200'
                                       title='You can turn off visibility of this catagory' onClick={() => {CatagoryVisibleModalOpen(item.catagoryname, item._id, item.status)}}>
                                         {
                                             item.status == true? <Eye className='text-[#FFF]' size={25}/> 
@@ -163,7 +167,7 @@ export default function EditCatagories() {
                                         }
                                     </div>
                                 </div>
-                                <p className='text-[#000]'>{item.catagoryname}</p>
+                                <p className='text-[#000] text-[20px] font-semibold'>{item.catagoryname}</p>
                             </div>
                         )
                     })

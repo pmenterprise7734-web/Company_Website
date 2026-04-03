@@ -8,7 +8,7 @@ import HomePage from './components/HomePage'
 //AdminPage
 import AdminHome from './admin/AdminHome'
 import AdminAddProduct from './admin/AdminAddProduct'
-import EditCatagories from './admin/EditCatagories'
+import ViewAllCatagories from './admin/ViewAllCatagories'
 
 
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
 
           <Route exact path="/AdminHome" element={<AdminHome/>} />
           <Route exact path="/AdminAddProduct" element={<AdminAddProduct/>} />
-          <Route exact path="/EditCatagories" element={<EditCatagories/>} />
+          <Route exact path="/ViewAllCatagories" element={<ViewAllCatagories/>} />
         </Routes>
       </BrowserRouter>
     </div>

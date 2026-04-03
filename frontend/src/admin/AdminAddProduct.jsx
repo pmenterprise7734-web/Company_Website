@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TextField, Select, MenuItem, InputLabel } from '@mui/material'
 import { BadgePlus } from 'lucide-react';
 
@@ -14,6 +14,21 @@ export default function AdminAddProduct() {
   const[Description,setDescription] = useState("")
   const[Img, setImg] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoqKhl0i-yIbhEa_Qejs3pD056MhjETa0TVw&s")
   const[Model, setModel] = useState("")
+
+  const[AllCatagory, setAllCatagory] = useState([])
+
+
+  useEffect(() => {
+    GetAllCatagory()
+  },[])
+
+  const GetAllCatagory = async() => {
+        const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/catagory/getCatagory`)
+        const data = await response.json()
+        setAllCatagory(data)
+        console.log(data)
+    }
+
 
   const onSubmit = () => {
     const Time = Date.now()
@@ -67,9 +82,15 @@ export default function AdminAddProduct() {
             </TextField>
             <TextField select label="Catagory" value={Catagory} sx={{width:'23%','& .MuiOutlinedInput-root':{backgroundColor:'#FFF', borderRadius:3, fontSize:16}}} 
               onChange={(e) => {setCatagory(e.target.value)}}>
-              <MenuItem value={"TT"}>Table Top</MenuItem>
-              <MenuItem value={"PF"}>Platform</MenuItem>
-              <MenuItem value={"HS"}>Hanging Scale</MenuItem>
+              {
+                AllCatagory?.length > 0? (
+                  AllCatagory.map((item) => (
+                    <MenuItem value={item.value}>{item.catagoryname}</MenuItem>
+                  ))
+                ) : (
+                  <MenuItem disabled>There is nothing to show. Please refresh and try again</MenuItem>
+                )
+              }
             </TextField>
             <TextField id="outlined-basic" label="PanSize" variant="outlined" sx={{width:'23%','& .MuiOutlinedInput-root':{backgroundColor:'#FFF', borderRadius:3, fontSize:16}}}
               onChange={(e) => {setPanSize(e.target.value)}}
@@ -91,7 +112,7 @@ export default function AdminAddProduct() {
         </div>
       </div>
       <div className='flex h-[50px] w-[200px] bg-[#0a8a0c] self-end m-5 rounded-[10px] justify-center self-center items-center cursor-pointer hover:scale-110 duration-200' onClick={() => {onSubmit()}}>
-        <p className='text-[#FFF] text-[20px]'>Submit</p>
+        <p className='text-[#FFF] text-[20px]'>Continue</p>
       </div>
     </div>
   )
