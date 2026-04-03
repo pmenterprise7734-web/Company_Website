@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-function App() {
+
+//UserPage
+import HomePage from './components/HomePage'
+
+//AdminPage
+import AdminHome from './admin/AdminHome'
+import AdminAddProduct from './admin/AdminAddProduct'
+import EditCatagories from './admin/EditCatagories'
+
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<HomePage/>} />
 
-export default App;
+          <Route exact path="/AdminHome" element={<AdminHome/>} />
+          <Route exact path="/AdminAddProduct" element={<AdminAddProduct/>} />
+          <Route exact path="/EditCatagories" element={<EditCatagories/>} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  )
+}
