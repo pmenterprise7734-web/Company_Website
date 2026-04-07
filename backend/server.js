@@ -2,11 +2,13 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const ConnectDB = require("./DBConnection/DBConnect")
+
 //Testing
 const TestRoute = require("./routes/TestRoute")
 //Routes
 const ProductRoute = require("./routes/ProductRoute")
 const CatagoryRoute = require("./routes/CatagoryRoute")
+const HomeBannerRoute = require("./routes/HomeBannerRoute")
 
 const app = express();
 
@@ -20,6 +22,7 @@ app.use('/TestTask', TestRoute)
 //Routes
 app.use('/product', ProductRoute)
 app.use('/catagory', CatagoryRoute)
+app.use('/homeBanner', HomeBannerRoute)
 
 
 

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { TextField, Select, MenuItem, InputLabel } from '@mui/material'
-import { BadgePlus } from 'lucide-react';
+import { BadgePlus, ImagePlus } from 'lucide-react';
+import { storage } from "../firebase"
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 
 export default function AdminAddProduct() {
@@ -12,8 +14,11 @@ export default function AdminAddProduct() {
   const[PanSize,setPanSize] = useState("")
   const[Accuracy,setAccuracy] = useState("")
   const[Description,setDescription] = useState("")
-  const[Img, setImg] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoqKhl0i-yIbhEa_Qejs3pD056MhjETa0TVw&s")
+  const[PreviewImg, setPreviewImg] = useState("") // Temporary link for image preview
+  const[Img, setImg] = useState("")
   const[Model, setModel] = useState("")
+  const[UploadingImg, setUploadingImg] = useState(false) // To make the system wait untill image is fully uploaded
+  
 
   const[AllCatagory, setAllCatagory] = useState([])
 
@@ -56,6 +61,46 @@ export default function AdminAddProduct() {
       })
     })
   }
+
+
+const inputRef = useRef()
+const ImageUploadClick = () => {
+  inputRef.current.click()
+}
+
+
+// In the current version the selected Image directly uploads to the storage
+    const ImageSelection = async(e) => {
+        console.log(e)
+        const selectedFile = e.target.files[0]
+        setUploadingImg(true)
+
+        if (!selectedFile) {
+            setUploadingImg(false)
+            alert("Please select an Image")
+            return;  
+        } 
+
+        //preview for image to be uploaded
+        const previewUrl = URL.createObjectURL(selectedFile)
+        setPreviewImg(previewUrl)
+
+        const fileRef = ref( storage, `images/${Date.now()}_${selectedFile.name}` )
+
+        try {
+            await uploadBytes(fileRef, selectedFile)
+            const downloadUrl = await getDownloadURL(fileRef)
+            setImg(downloadUrl)
+            console.log(downloadUrl)
+            setUploadingImg(false)
+        } catch (error) {
+            console.log("error message: " + error)
+            setUploadingImg(false)
+            alert("Image Upload unsuccessful")
+        }
+
+    }
+
 
   
 
@@ -105,13 +150,28 @@ export default function AdminAddProduct() {
               onChange={(e) => {setDescription(e.target.value)}}
             />
             <div className='flex h-[150px] w-[20vw] bg-[#000] rounded-[10px] justify-center items-center cursor-pointer'>
-              <BadgePlus className='text-[#fff]' size={50} />
+              {
+                PreviewImg == "" ? 
+                (
+                    <div className='flex h-full w-full border cursor-pointer items-center justify-center'
+                    onClick={ImageUploadClick}>
+                        <ImagePlus className='w-10 text-[#17b02b]' />
+                    </div>
+                ) : (
+                    <div className='flex h-full w-full cursor-pointer items-center justify-center'
+                    style={{backgroundImage:`url(${PreviewImg})`, backgroundSize:"cover", backgroundPosition:'center'}}
+                    onClick={ImageUploadClick}>
+                    </div>
+                )
+              }
+            <input type='file' disabled={UploadingImg} ref={inputRef} hidden onChange={ImageSelection} />
             </div>
           </div>
 
         </div>
       </div>
-      <div className='flex h-[50px] w-[200px] bg-[#0a8a0c] self-end m-5 rounded-[10px] justify-center self-center items-center cursor-pointer hover:scale-110 duration-200' onClick={() => {onSubmit()}}>
+      <div className={`flex h-[50px] w-[200px] self-end m-5 rounded-[10px] justify-center self-center items-center ${!UploadingImg? "bg-[#2ba31d] cursor-pointer hover:scale-110 duration-300" : "bg-[#757575] cursor-not-allowed"} `}
+      onClick={() => {if(!UploadingImg) onSubmit()}}>
         <p className='text-[#FFF] text-[20px]'>Continue</p>
       </div>
     </div>

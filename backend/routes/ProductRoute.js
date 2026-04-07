@@ -9,7 +9,7 @@ router.post("/addProduct", async(req, res) => {
     const quantity = 1
 
     try {
-        const result = await product.create({
+        const result = await product.create({ 
             company: company, 
             catagory: catagory, 
             name: name,

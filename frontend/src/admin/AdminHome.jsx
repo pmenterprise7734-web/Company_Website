@@ -7,11 +7,17 @@ function AdminHome() {
 
 
   return (
-    <div className='flex min-h-screen w-full border-2 border-red-500 justify-center items-center'>
+    <div className='flex flex-row min-h-screen w-full justify-center items-center'>
 
-      <Link to={'/ViewAllCatagories'}>
-        <div className='flex h-[200px] w-[400px] bg-[#2ba31d] justify-center items-center rounded-[20px] cursor-pointer hover:scale-110 duration-300 m-5'>
+      <Link to={'/AdminViewAllCatagories'}>
+        <div className='flex h-[100px] w-[300px] bg-[#2ba31d] justify-center items-center rounded-[20px] cursor-pointer hover:scale-110 duration-300 m-5'>
           <p className='text-[#FFF]'>View All products</p>
+        </div>
+      </Link>
+
+      <Link to={'/AdminHeroBanner'}>
+        <div className='flex h-[100px] w-[300px] bg-[#2b0000] justify-center items-center rounded-[20px] cursor-pointer hover:scale-110 duration-300 m-5'>
+          <p className='text-[#FFF]'>HomePage Sliding Banners</p>
         </div>
       </Link>
 

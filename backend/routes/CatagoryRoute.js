@@ -34,7 +34,7 @@ router.post("/addCatagory", async(req, res) => {
 
 router.get("/getCatagory", async(req, res) => {
     try {
-        const result = await Catagory.find()
+        const result = await Catagory.find() 
         res.json(result)
     } catch (error) {
         res.json(false)
