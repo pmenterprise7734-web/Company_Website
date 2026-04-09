@@ -33,7 +33,7 @@ export default function App() {
           <Route exact path="/AdminHome" element={<AdminHome/>} />
           <Route exact path="/AdminAddProduct" element={<AdminAddProduct/>} />
           <Route exact path="/AdminViewAllCatagories" element={<AdminViewAllCatagories/>} />
-          <Route exact path="/AdminProductList" element={<AdminProductList/>} />
+          <Route exact path="/AdminProductList/:value" element={<AdminProductList/>} />
           <Route exact path="/AdminHeroBanner" element={<AdminHeroBanner/>} />
         </Routes>
       </BrowserRouter>

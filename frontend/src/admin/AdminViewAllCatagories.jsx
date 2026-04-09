@@ -158,7 +158,7 @@ export default function AdminViewAllCatagories() {
                     AllCatagory.map((item) => {
                         return(
                             <div key={item._id} className='flex flex-col items-center my-5'>
-                                <Link to={"/AdminProductList"} state={{value:item.value, catagoryname:item.catagoryname}} className="flex h-[300px] w-[320px] rounded-[20px] bg-center my-5 bg-cover justify-end cursor-pointer hover:scale-[1.1] duration-200 active:scale-[1]" style={{ backgroundImage: `url(${item.picture})` }}>
+                                <Link to={`/AdminProductList/${item.value}`} className="flex h-[300px] w-[320px] rounded-[20px] bg-center my-5 bg-cover justify-end cursor-pointer hover:scale-[1.1] duration-200 active:scale-[1]" style={{ backgroundImage: `url(${item.picture})` }}>
                                     <div className='flex flex-row w-[15%] h-[15%] bg-[#000] m-5 rounded-[20px] justify-center items-center cursor-pointer hover:scale-[1.2] duration-200'
                                       title='You can turn off visibility of this catagory' 
                                       onClick={(e) => {
@@ -260,6 +260,9 @@ export default function AdminViewAllCatagories() {
         </Modal>
         {/* Add-Catagory Modal */}
         {/* Add-Catagory Modal */}
+
+
+
 
     </div>
   )
