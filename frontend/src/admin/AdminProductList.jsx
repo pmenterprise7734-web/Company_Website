@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import HeadingButtons from '../components/elements/HeadingButtons'
-import { MoveUpRight, Trash2, SquarePen } from 'lucide-react'
+import { MoveUpRight, Trash2, SquarePen, Heart } from 'lucide-react'
 import { Modal } from '@mui/material'
 import AdminAddProduct from './AdminAddProduct'
 
@@ -44,6 +44,21 @@ export default function AdminProductList() {
       }
     }
 
+    const AddToFavorite = async(id) => {
+      console.log(id)
+      const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/AddtoFavorite/${id}`, {
+        method:"POST"
+      })
+
+      console.log(response.status)
+      if(response.status == 200){
+        setRefresh(prev=>!prev)
+      }
+      else{
+        alert("Something went wrong. Please try again later")
+      }
+    }
+
 
 
     
@@ -59,11 +74,19 @@ export default function AdminProductList() {
               return(
                 <div className='flex flex-col w-[30%] aspect-[4/5] border-2 border-[#FFB720] rounded-b-[20px]'>
                   
-                  <div className='flex flex-col justify-between items-end h-[75%] w-[full] cursor-pointer' style={{backgroundImage:`url(${item.picture})`, backgroundSize:'cover', backgroundPosition:'center'}}
+                  <div className='flex flex-col justify-between h-[75%] w-[full] cursor-pointer' style={{backgroundImage:`url(${item.picture})`, backgroundSize:'cover', backgroundPosition:'center'}}
                   onClick={() => {console.log("Link was touched")}}>
-                    <div className='flex flex-col m-2 gap-2 items-end'>
-                      <p className='text-[#fff] font-medium text-md px-4 py-1 bg-[rgba(148,148,148,0.78)] rounded-[15px] cursor-default'>{item.pansize}</p>
-                      <p className='text-[#FFF] font-medium text-[12px] px-4 py-1 bg-[rgba(255,183,32,0.83)] rounded-[15px] cursor-default'>{item.company}</p>
+                    <div className='flex flex-row w-full justify-between items-start'>
+                      <p className={`text-xl p-2 ${item.favorite? "text-[#FFF] bg-[#06cf06]" : "text-[#06cf06] bg-[#FFF]"} m-2 rounded-full justify-start hover:scale-110 active:scale-90 duration-200`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        AddToFavorite(item._id)
+                      }}><Heart/></p>
+                      <div className='flex flex-col m-2 gap-2'>
+                        <p className='text-[#fff] font-medium self-end text-md px-4 py-1 bg-[rgba(148,148,148,0.78)] rounded-[15px] cursor-default'>{item.pansize}</p>
+                        <p className='text-[#FFF] font-medium self-end text-[12px] px-4 py-1 bg-[rgba(255,183,32,0.83)] rounded-[15px] cursor-default'>{item.company}</p>
+                      </div>
                     </div>
 
                     <div className='flex flex-col m-2 gap-2 items-end' >
@@ -119,6 +142,6 @@ export default function AdminProductList() {
       </Modal>
 
 
-    </div>
+    </div> 
   )
 }

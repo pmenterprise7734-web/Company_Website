@@ -102,7 +102,7 @@ export default function AdminHeroBanner() {
   return (
     <div className='flex flex-col w-full '>
         <div className='flex flex-row w-full justify-between items-center'>
-            <div className='flex h-[60px] w-[250px] bg-[#2ba] rounded-[10px] m-5 justify-center items-center cursor-pointer hover:scale-110 duration-200 active:scale-90'>
+            <div className='flex h-[60px] w-[250px] bg-[#FFB720] rounded-[10px] m-5 justify-center items-center cursor-pointer hover:scale-110 duration-200 active:scale-90'>
                 <p className='text-[#FFF] font-bold text-xl'>Home Page Banners</p>
             </div>
 

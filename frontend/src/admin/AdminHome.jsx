@@ -21,6 +21,12 @@ function AdminHome() {
         </div>
       </Link>
 
+      <Link to={'/AdminTopProducts'}>
+        <div className='flex h-[100px] w-[300px] bg-[#261cd9] justify-center items-center rounded-[20px] cursor-pointer hover:scale-110 duration-300 m-5'>
+          <p className='text-[#FFF]'>Top Products</p>
+        </div>
+      </Link>
+
     </div>
   )
 }

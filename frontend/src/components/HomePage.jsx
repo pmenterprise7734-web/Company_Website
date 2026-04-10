@@ -87,7 +87,7 @@ function HomePage() {
       <div className='flex flex-col bg-[#f5f5f5]'>
         <HeadingButtons text='Catagories'/>
         <div className='flex flex-col items-center mx-[5%] my-10' >
-          <div className='flex flex-row overflow-x-auto w-full no-scrollbar'>
+          <div className='flex flex-row overflow-x-auto w-full py-[5px] no-scrollbar'>
             {
               AllCatagory?.map((item) => {
                 if (item.status == true){
@@ -111,15 +111,11 @@ function HomePage() {
       </div>
 
 
+      {/* Top product Section */}
+
+
     </div>
   )
 }
 
 export default HomePage
-// backgroundImage:`url(/Banners/Banner2.png)`, backgroundPosition:'center' , backgroundSize:'cover', 
-
-
-{/* <div className='absolute flex flex-col w-[30%] bottom-[-10%] left-[-5%] aspect-square rounded-full items-start justify-center items-center bg-[#FFF] shadow-2xl shadow-[30px_-20px_30px_rgba(255,255,255,0.2)] '>
-          <Link  className=' text-[#FFF] text-xl font-medium bg-[#FFB720] px-12 py-2 rounded-[10px] border border-[#c4c4c4] mb-2'> Explore </Link>
-          <Link  className='text-[#000] px-10 py-2 rounded-[10px] bg-[#f2f2f2]'>About Us</Link>
-        </div> */}

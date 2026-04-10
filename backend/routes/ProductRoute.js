@@ -4,8 +4,8 @@ const router = express.Router()
  
 
 router.post("/addProduct", async(req, res) => {
-    const {name, capacity, catagory, company, pansize, accuracy, desc, picture, model} = req.body
-    console.log(name, capacity, catagory, company, pansize, accuracy, desc, picture, model)
+    const {name, capacity, catagory, company, pansize, accuracy, desc, picture, model, favorite} = req.body
+    console.log(name, capacity, catagory, company, pansize, accuracy, desc, picture, model, favorite)
     const quantity = 1
 
     try {
@@ -19,7 +19,8 @@ router.post("/addProduct", async(req, res) => {
             accuracy: accuracy, 
             desc: desc, 
             quantity: quantity, 
-            picture: picture
+            picture: picture,
+            favorite:favorite,
         })
 
         res.status(200).json({
@@ -39,7 +40,6 @@ router.post("/addProduct", async(req, res) => {
 })
 
 
-
 router.get('/getProductbyId/:value', async(req, res) => {
     try {
         const { value } = req.params
@@ -54,6 +54,7 @@ router.get('/getProductbyId/:value', async(req, res) => {
         res.status(500).json(error)
     }
 })
+
 
 router.post('/deleteProduct/:id', async(req,res) => {
     try {
@@ -96,6 +97,36 @@ router.post("/updateProduct/:id", async(req,res) => {
 })
  
 
+router.post("/AddtoFavorite/:id", async(req, res) => {
+    try {
+        const { id } = req.params
+        console.log(id)
+        const response = await product.findById(id)
+        console.log(response)
+        
+        response.favorite = !response.favorite
+        await response.save()
+
+
+        res.status(200).json("Changed the favorite status")
+
+    } catch (error) {
+        res.status(500).json("status not changed")
+    }
+})
+
+
+router.get("/callTopProducts", async(req, res) => {
+    try {
+        const data = await product.find({favorite:true})
+        console.log(data)
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({
+            message:"Sorry, Data can't be fetched"
+        })
+    }
+})
 
 
 

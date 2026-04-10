@@ -11,7 +11,7 @@ const Product = new mongoose.Schema({
     desc:String,
     quantity: Number, // no need now, will be in need for future use. so using constant value 1
     picture:String,
-    
+    favorite:Boolean,
 })
 
 const product = mongoose.model('product', Product)

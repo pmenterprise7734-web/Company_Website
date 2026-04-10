@@ -84,6 +84,7 @@ export default function AdminAddProduct() {
         desc: Description,
         picture:Img,
         model:Model,
+        favorite:false
       })
     })
     if(Response.status == 200){
