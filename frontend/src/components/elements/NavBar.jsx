@@ -7,8 +7,8 @@ export default function NavBar() {
 
   return (
     <div className='flex flex-row w-full h-[10vh] justify-between'>
-      <div className='flex w-[40%] h-full'>
-        <Link to={'/'} style={{backgroundImage:"url(/Logo/PMlogo.png)", backgroundSize:'cover', backgroundPosition:'center'}} className='w-[35%] ml-[5%]'></Link>
+      <div className='flex w-[40%] h-full items-center'>
+        <Link to={'/'} style={{backgroundImage:"url(/Logo/PMlogo.png)", backgroundSize:'cover', backgroundPosition:'center'}} className='h-[80%] w-[50%] ml-[5%]'></Link>
       </div>
       <div className='flex w-[60%] h-full bg-[#1B1A1C] rounded-bl-[30px] justify-between border-b border-[#c4c4c4] '>
         <div className='flex flex-row w-[55%] h-full justify-around items-center ml-10'>

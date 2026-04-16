@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post("/addProduct", async(req, res) => {
     const {name, capacity, catagory, company, pansize, accuracy, desc, picture, model, favorite} = req.body
-    console.log(name, capacity, catagory, company, pansize, accuracy, desc, picture, model, favorite)
+    // console.log(name, capacity, catagory, company, pansize, accuracy, desc, picture, model, favorite)
     const quantity = 1
 
     try {
@@ -43,10 +43,10 @@ router.post("/addProduct", async(req, res) => {
 router.get('/getProductbyId/:value', async(req, res) => {
     try {
         const { value } = req.params
-        console.log(value)
+        // console.log(value)
 
         const products = await product.find({catagory:value})
-        console.log(products)
+        // console.log(products)
 
         res.status(200).json(products)
 
@@ -59,7 +59,7 @@ router.get('/getProductbyId/:value', async(req, res) => {
 router.post('/deleteProduct/:id', async(req,res) => {
     try {
         const { id } = req.params
-        console.log(id)
+        // console.log(id)
 
         const response  = await product.findByIdAndDelete({_id:id})
         res.status(200).json({
@@ -76,8 +76,8 @@ router.post("/updateProduct/:id", async(req,res) => {
     try{
         const { id } = req.params
         const { name, capacity, catagory, company, pansize, accuracy, desc, picture, model } = req.body
-        console.log(id)
-        console.log(name, capacity, catagory, company, pansize, accuracy, desc, picture, model)
+        // console.log(id)
+        // console.log(name, capacity, catagory, company, pansize, accuracy, desc, picture, model)
 
         const updateData = {};
         if (name !== undefined) updateData.name = name;
@@ -100,9 +100,9 @@ router.post("/updateProduct/:id", async(req,res) => {
 router.post("/AddtoFavorite/:id", async(req, res) => {
     try {
         const { id } = req.params
-        console.log(id)
+        // console.log(id)
         const response = await product.findById(id)
-        console.log(response)
+        // console.log(response)
         
         response.favorite = !response.favorite
         await response.save()
@@ -119,6 +119,20 @@ router.post("/AddtoFavorite/:id", async(req, res) => {
 router.get("/callTopProducts", async(req, res) => {
     try {
         const data = await product.find({favorite:true})
+        // console.log(data)
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({
+            message:"Sorry, Data can't be fetched"
+        })
+    }
+})
+
+router.get("/callProductByCatagory/:value", async(req, res) => {
+    const { value } = req.params  
+    console.log(value)
+    try {
+        const data = await product.find({catagory:value})
         console.log(data)
         res.status(200).json(data)
     } catch (error) {

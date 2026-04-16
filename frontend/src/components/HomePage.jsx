@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import NavBar from './elements/NavBar'
 import HeadingButtons from './elements/HeadingButtons'
 import BrandShow from './elements/BrandShow'
 import CatagoryShow from './elements/CatagoryShow'
@@ -52,13 +51,13 @@ function HomePage() {
     <div className='flex flex-col min-h-Screen w-full'>
     {
       Banners && Banners.length>0 ? (
-        <Swiper className='relative w-full aspect-[10/4] my-0 items-end overflow-hidden' style={{marginBottom:5}}
+        <Swiper className='relative w-full aspect-[12/5] my-0 items-end overflow-hidden' style={{marginBottom:5}}
         modules={[Pagination, Autoplay, EffectFade]}
         spaceBetween={0}
         slidesPerView={1} 
         pagination = {{ clickable: true }}
-        autoplay = {{delay:2000}}
-        speed={1000}
+        autoplay = {{delay:2500}}
+        speed={1500}
         effect="fade"
         fadeEffect={{crossFade: true}}
         loop={true}>
@@ -110,7 +109,7 @@ function HomePage() {
       {/* About Section */}
       <div className='flex flex-col'>
         <HeadingButtons text='About Us'/>
-        <div className='flex w-[90%] my-10 aspect-[10/3] border-2 border-[#0f0] rounded-[20px] self-center'>
+        <div className='flex w-[90%] my-10 aspect-[10/3]  rounded-[20px] self-center' style={{backgroundImage:`url(/Banners/Motivation.png)`, backgroundSize:'cover', backgroundPosition:'center'}}>
         </div>
       </div>
 
