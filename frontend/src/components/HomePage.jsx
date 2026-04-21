@@ -36,19 +36,20 @@ function HomePage() {
         const result = await fetch(`http://${process.env.REACT_APP_IPV}:5000/homeBanner/getBanners`)
         const data = await result.json()
         setBanners(data[0].banners)
-        console.log(data[0].banners)
+        // console.log(data[0].banners)
     }
 
     const CallData = async() => {
       const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/callTopProducts`)
       const data = await response.json()
-      console.log(data)
+      // console.log(data)
       setTopProdData(data)
     }
 
 
   return (
     <div className='flex flex-col min-h-Screen w-full'>
+    {/* Banner Section */}
     {
       Banners && Banners.length>0 ? (
         <Swiper className='relative w-full aspect-[12/5] my-0 items-end overflow-hidden' style={{marginBottom:5}}
@@ -95,7 +96,7 @@ function HomePage() {
               AllCatagory?.map((item) => {
                 if (item.status == true){
                   return(
-                    <CatagoryShow Name={item.catagoryname} Image={item.picture} Value={item.value} />
+                    <CatagoryShow key={(item.value)} Name={item.catagoryname} Image={item.picture} Value={item.value} BName={"All"} />
                   )
                 }
               })
@@ -116,13 +117,13 @@ function HomePage() {
 
       {/* Top product Section */}
       <div className='flex flex-col bg-[#f5f5f5]'>
-        <HeadingButtons text='Top products'/>
+        <HeadingButtons text='Top Selling products'/>
         <div className='flex flex-row flex-wrap items-center mx-[5%] my-10 gap-8' >
             {
               TopProdData && TopProdData.length>0 ? (
                 TopProdData.map((item) => {
                   return(
-                    <div className='flex flex-col w-[20%] aspect-[4/5] border-2 border-[#FFB720] rounded-b-[20px]'>
+                    <div key={item._id} className='flex flex-col w-[20%] aspect-[4/5] border-2 border-[#FFB720] rounded-b-[20px]'>
                       <div className='flex flex-col justify-between h-[75%] w-[full] cursor-pointer' style={{backgroundImage:`url(${item.picture})`, backgroundSize:'cover', backgroundPosition:'center'}}
                       onClick={() => {console.log("Link was touched")}}>
                         <div className='flex flex-row w-full justify-end items-start'>

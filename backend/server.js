@@ -9,6 +9,7 @@ const TestRoute = require("./routes/TestRoute")
 const ProductRoute = require("./routes/ProductRoute")
 const CatagoryRoute = require("./routes/CatagoryRoute")
 const HomeBannerRoute = require("./routes/HomeBannerRoute")
+const QueryRoute = require("./routes/QueryRoute")
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/TestTask', TestRoute)
 app.use('/product', ProductRoute)
 app.use('/catagory', CatagoryRoute)
 app.use('/homeBanner', HomeBannerRoute)
+app.use('/Query', QueryRoute)
 
 
 
