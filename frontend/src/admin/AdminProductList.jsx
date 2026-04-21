@@ -102,8 +102,8 @@ export default function AdminProductList() {
  
                     <div className='flex flex-col m-2 gap-2 items-end' >
                       <p className='text-[#828282] font-medium italic text-[12px] px-6 py-1 bg-[#EFEFEF] rounded-[15px] cursor-default'>Accuracy: {item.accuracy}</p>
-                      <p className='flex text-[#FFF] font-medium text-[20px] px-6 py-2 bg-[#FFB720] rounded-[15px] items-center cursor-pointer hover:scale-105 duration-200 active:scale-95'
-                      onClick={(e) => {e.stopPropagation(); e.preventDefault()}}>enquire <MoveUpRight size={20}/> </p>
+                      {/* <p className='flex text-[#FFF] font-medium text-[20px] px-6 py-2 bg-[#FFB720] rounded-[15px] items-center cursor-pointer hover:scale-105 duration-200 active:scale-95'
+                      onClick={(e) => {e.stopPropagation(); e.preventDefault()}}>enquire <MoveUpRight size={20}/> </p> */}
                     </div>
 
                     

@@ -22,8 +22,10 @@ router.post("/AddQuery", async(req,res) => {
             product:{
                 id:product?.id || "na",
                 model: product?.model || "na",
-                prodname:product?.prodname || "na",
-                prodcatagory:product?.prodcatagory || "na"
+                prodname:product?.name || "na",
+                prodcatagory:product?.catagory || "na",
+                quantity:product?.quantity || null,
+                picture:product?.picture || "na"
             }
         })
 

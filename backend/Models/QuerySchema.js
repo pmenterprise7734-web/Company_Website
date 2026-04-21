@@ -16,7 +16,9 @@ const QuerySchema = new mongoose.Schema({
         id:String,
         model:String,
         prodname:String,
-        prodcatagory:String
+        prodcatagory:String,
+        quantity:Number,
+        picture:String
     }
 })
 
