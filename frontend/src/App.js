@@ -16,6 +16,7 @@ import AdminViewAllCatagories from './admin/AdminViewAllCatagories'
 import AdminProductList from './admin/AdminProductList'
 import AdminHeroBanner from './admin/AdminHeroBanner'
 import AdminTopProducts from './admin/AdminTopProducts'
+import AdminEnquiryDesk from './admin/AdminEnquiryDesk'
 
 //NavBar element
 import NavBar from './components/elements/NavBar'
@@ -42,6 +43,7 @@ export default function App() {
           <Route exact path="/AdminProductList/:value" element={<AdminProductList/>} />
           <Route exact path="/AdminHeroBanner" element={<AdminHeroBanner/>} />
           <Route exact path="/AdminTopProducts" element={<AdminTopProducts/>} />
+          <Route exact path="/AdminEnquiryDesk" element={<AdminEnquiryDesk/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>

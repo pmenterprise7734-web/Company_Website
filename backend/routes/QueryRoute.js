@@ -39,4 +39,22 @@ router.post("/AddQuery", async(req,res) => {
 })
 
 
+router.get("/getAllQuery", async(req, res) => {
+    try {
+        const response = await query_schema.find()
+
+        res.status(200).json({
+            data: response,
+            message:"All queries fetched successfully"
+        })
+    } catch (error) {
+        res.status(500).json({
+            message:"Internal error! no query fetched"
+        })
+    }
+})
+
+
+
+
 module.exports = router

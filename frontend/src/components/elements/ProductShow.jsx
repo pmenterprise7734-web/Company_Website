@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 
 export default function ProductShow({Products, EmptyText}) {
 
+  const[ConfirmationModal, setConfirmationModal] = useState(false)
   const[enquireModal,setEnquireModal] = useState(false)
-  const onCloseEnquireModal = () => setEnquireModal(false)
   const[form,setForm] = useState({
       name:"",
       company:"",
@@ -31,6 +31,19 @@ export default function ProductShow({Products, EmptyText}) {
       picture:"",
       quantity:null,
     })
+
+  const onCloseEnquireModal = () => {
+    setEnquireModal(false)
+    setForm({...form, name:"", company:"", address:"", state:"", country:"", email:"", phone:"", website:"", query:""})
+    setProdData({...ProdData, quantity:null})
+  }
+
+  const onCloseConfirmationModal = () => {
+    setEnquireModal(false)
+    setConfirmationModal(false)
+    setForm({...form, name:"", company:"", address:"", state:"", country:"", email:"", phone:"", website:"", query:""})
+    setProdData({...ProdData, quantity:null})
+  }
 
 
 
@@ -95,6 +108,7 @@ export default function ProductShow({Products, EmptyText}) {
   
     if(response.status == 200){
       console.log("Data upload complete")
+      setConfirmationModal(true)
     }
   }
 
@@ -184,7 +198,7 @@ export default function ProductShow({Products, EmptyText}) {
                   </div>
 
                   <div className='flex w-full justify-center items-center'>
-                    <TextField label="Qtn." type='number' className='w-[30%] m-auto' sx={whiteStyles} value={ProdData.quantity} required onChange={(e) => setProdData({...ProdData, quantity: e.target.value})}/>
+                    <TextField label="Qtn." type='number' inputProps={{min:1}} className='w-[30%] m-auto' sx={whiteStyles} value={ProdData.quantity} required onChange={(e) => setProdData({...ProdData, quantity: e.target.value})}/>
                   </div>
               </div>
 
@@ -210,6 +224,15 @@ export default function ProductShow({Products, EmptyText}) {
           </div>
         </Modal>
 
+        <Modal open={ConfirmationModal} onClose={onCloseConfirmationModal}>
+          <div className='flex flex-col h-screen w-full bg-[rgba(0,0,0,0.9)] justify-center items-center'>
+            <div className='flex flex-col px-16 py-10 bg-[#FFF] rounded-[10px] justify-center items-center my-4'>
+              <p className='text-[#14b319] text-2xl my-10 font-bold'>Your Query Has been Submitted Successfully</p>
+              <p className='text-[#14b319]'>you'll get a callback from our team soon.</p>
+            </div>
+            <p className='text-[#FFF] bg-[#14b319] py-4 px-8 rounded-[10px] cursor-pointer hover:scale-110 active:scale-90 duration-200' onClick={() => {onCloseConfirmationModal()}}>Ok </p>
+          </div>
+        </Modal>
 
 
     </div>
