@@ -49,7 +49,7 @@ function HomePage() {
 
 
   return (
-    <div className='flex flex-col min-h-Screen w-full'>
+    <div className='flex flex-col min-h-screen w-full overflow-x-hidden'>
     {/* Banner Section */}
     {
       Banners && Banners.length>0 ? (
