@@ -23,7 +23,7 @@ export default function Catagories() {
 
 
   const GetAllCatagory = async() => {
-          const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/catagory/getCatagory`)
+          const response = await fetch(`https://company-website-cw4n.onrender.com/catagory/getCatagory`)
           const data = await response.json()
           setAllCatagory(data)
           console.log(data)

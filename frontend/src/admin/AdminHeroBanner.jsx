@@ -27,7 +27,7 @@ export default function AdminHeroBanner() {
     },[Reload])
 
     const getBanners = async() => {
-        const result = await fetch(`http://${process.env.REACT_APP_IPV}:5000/homeBanner/getBanners`)
+        const result = await fetch(`https://company-website-cw4n.onrender.com/homeBanner/getBanners`)
         const data = await result.json()
         setBanners(data[0].banners)
         console.log(data[0].banners)
@@ -69,7 +69,7 @@ export default function AdminHeroBanner() {
 
 
     const SaveImageLinkToDatabase = async(url) => {
-        const result = await fetch(`http://${process.env.REACT_APP_IPV}:5000/homeBanner/addBanner`,{
+        const result = await fetch(`https://company-website-cw4n.onrender.com/homeBanner/addBanner`,{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ export default function AdminHeroBanner() {
 
 
     const DeleteBanner = async(url) => {
-        const result = await fetch(`http://${process.env.REACT_APP_IPV}:5000/homeBanner/deleteBanner`,{
+        const result = await fetch(`https://company-website-cw4n.onrender.com/homeBanner/deleteBanner`,{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json'

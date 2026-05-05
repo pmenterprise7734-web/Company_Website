@@ -16,7 +16,7 @@ export default function AdminTopProducts() {
   },[Refresh])
 
   const CallData = async() => {
-    const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/callTopProducts`)
+    const response = await fetch(`https://company-website-cw4n.onrender.com/product/callTopProducts`)
     const data = await response.json()
     setData(data)
   }
@@ -24,7 +24,7 @@ export default function AdminTopProducts() {
 
   const AddToFavorite = async(id) => {
       console.log(id)
-      const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/AddtoFavorite/${id}`, {
+      const response = await fetch(`https://company-website-cw4n.onrender.com/product/AddtoFavorite/${id}`, {
         method:"POST"
       })
 

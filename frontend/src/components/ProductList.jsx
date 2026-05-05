@@ -22,7 +22,7 @@ export default function ProductList() {
 
 
     const CallProductByCatagory = async() => {
-        const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/callProductByCatagory/${CValue}`)
+        const response = await fetch(`https://company-website-cw4n.onrender.com/product/callProductByCatagory/${CValue}`)
         const data = await response.json()
         console.log("Calling data: "+data)
         setProducts(data)

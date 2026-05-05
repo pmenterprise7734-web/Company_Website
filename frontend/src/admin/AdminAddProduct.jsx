@@ -54,7 +54,7 @@ export default function AdminAddProduct() {
   },[])
 
   const GetAllCatagory = async() => {
-        const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/catagory/getCatagory`)
+        const response = await fetch(`https://company-website-cw4n.onrender.com/catagory/getCatagory`)
         const data = await response.json()
         setAllCatagory(data)
         console.log(data)
@@ -69,7 +69,7 @@ export default function AdminAddProduct() {
   }
 
   const sendData = async(Model) => {
-    const Response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/addProduct`, {
+    const Response = await fetch(`https://company-website-cw4n.onrender.com/product/addProduct`, {
       method: "POST",
       headers:{
         'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ const ImageUploadClick = () => {
 
 
 const Update = async(Id) => {
-  const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/updateProduct/${Id}`,{
+  const response = await fetch(`https://company-website-cw4n.onrender.com/product/updateProduct/${Id}`,{
     method:"POST",
     headers:{
         'Content-Type': 'application/json'

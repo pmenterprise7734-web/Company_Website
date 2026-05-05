@@ -23,7 +23,7 @@ export default function AdminProductList() {
     },[Refresh])
 
     const fetchProducts = async() => {
-      const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/getProductbyId/${value}`)
+      const response = await fetch(`https://company-website-cw4n.onrender.com/product/getProductbyId/${value}`)
       const data = await response.json()
       setProducts(data)
       console.log(data)
@@ -32,7 +32,7 @@ export default function AdminProductList() {
 
     const DeleteProduct = async(id) => {
       console.log(id)
-      const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/deleteProduct/${id}`, {
+      const response = await fetch(`https://company-website-cw4n.onrender.com/product/deleteProduct/${id}`, {
         method:'POST'
       })
       setRefresh(prev=>!prev)
@@ -46,7 +46,7 @@ export default function AdminProductList() {
 
     const AddToFavorite = async(id) => {
       console.log(id)
-      const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/product/AddtoFavorite/${id}`, {
+      const response = await fetch(`https://company-website-cw4n.onrender.com/product/AddtoFavorite/${id}`, {
         method:"POST"
       })
 

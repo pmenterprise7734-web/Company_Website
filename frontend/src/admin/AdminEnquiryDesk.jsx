@@ -10,7 +10,7 @@ export default function AdminEnquiryDesk() {
   },[ProdEnquiryPage])
 
   const CallQueryData = async() => {
-    const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/Query/getAllQuery`)
+    const response = await fetch(`https://company-website-cw4n.onrender.com/Query/getAllQuery`)
     const data = await response.json()
     setAllQueries(data)
     console.log(data)

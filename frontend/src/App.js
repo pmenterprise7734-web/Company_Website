@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
 //UserPage
+import MainLayout from './components/MainLayout'
 import HomePage from './components/HomePage'
 import Catagories from './components/Catagories'
 import Gallery from './components/Gallery'
@@ -29,13 +30,14 @@ export default function App() {
   return (
     <div>
       <BrowserRouter>
-        <NavBar/>
         <Routes>
-          <Route exact path="/" element={<HomePage/>} />
-          <Route exact path="/Catagories" element={<Catagories/>} />
-          <Route exact path="/Gallery" element={<Gallery/>} />
-          <Route exact path="/AboutUs" element={<AboutUs/>} />
-          <Route exact path="/ProductList" element={<ProductList/>} />
+          <Route element={<MainLayout/>}>
+            <Route exact path="/" element={<HomePage/>} />
+            <Route exact path="/Catagories" element={<Catagories/>} />
+            <Route exact path="/Gallery" element={<Gallery/>} />
+            <Route exact path="/AboutUs" element={<AboutUs/>} />
+            <Route exact path="/ProductList" element={<ProductList/>} />
+          </Route>
 
           <Route exact path="/AdminHome" element={<AdminHome/>} />
           <Route exact path="/AdminAddProduct" element={<AdminAddProduct/>} />
@@ -45,7 +47,6 @@ export default function App() {
           <Route exact path="/AdminTopProducts" element={<AdminTopProducts/>} />
           <Route exact path="/AdminEnquiryDesk" element={<AdminEnquiryDesk/>} />
         </Routes>
-        <Footer/>
       </BrowserRouter>
     </div>
   )

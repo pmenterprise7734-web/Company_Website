@@ -61,7 +61,7 @@ const onSubmit = async() => {
     return
   }
 
-  const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/Query/AddQuery`,{
+  const response = await fetch(`https://company-website-cw4n.onrender.com/Query/AddQuery`,{
     method:"POST",
     headers:{
         'Content-Type': 'application/json'

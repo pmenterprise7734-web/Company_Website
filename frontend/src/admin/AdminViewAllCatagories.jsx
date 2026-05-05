@@ -44,7 +44,7 @@ export default function AdminViewAllCatagories() {
     
     // fetching all the catagories that exists under useEffect.
     const GetAllCatagory = async() => {
-        const response = await fetch(`http://${process.env.REACT_APP_IPV}:5000/catagory/getCatagory`)
+        const response = await fetch(`https://company-website-cw4n.onrender.com/catagory/getCatagory`)
         const data = await response.json()
         setAllCatagory(data)
         console.log(data)
@@ -64,7 +64,7 @@ export default function AdminViewAllCatagories() {
             alert("Please select an Image")
             return;
         }
-        const result = await fetch(`http://${process.env.REACT_APP_IPV}:5000/catagory/addCatagory`,{
+        const result = await fetch(`https://company-website-cw4n.onrender.com/catagory/addCatagory`,{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ export default function AdminViewAllCatagories() {
 
     // Changing visibily if Owner doesn't want to show some catagories or discontinuing it
     const ChangeVisibility = async() => {
-        const visibility = await fetch(`http://${process.env.REACT_APP_IPV}:5000/catagory/changeVisibility`,{
+        const visibility = await fetch(`https://company-website-cw4n.onrender.com/catagory/changeVisibility`,{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json'
