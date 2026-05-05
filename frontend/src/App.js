@@ -39,7 +39,7 @@ export default function App() {
             <Route exact path="/ProductList" element={<ProductList/>} />
           </Route>
 
-          <Route exact path="/AdminHome" element={<AdminHome/>} />
+          <Route exact path="/admin-home" element={<AdminHome/>} />
           <Route exact path="/AdminAddProduct" element={<AdminAddProduct/>} />
           <Route exact path="/AdminViewAllCatagories" element={<AdminViewAllCatagories/>} />
           <Route exact path="/AdminProductList/:value" element={<AdminProductList/>} />
