@@ -30,6 +30,6 @@ app.use('/Query', QueryRoute)
 
 
 const PORT = process.env.PORT || 5000;
-app.listen(Port, () => {
+app.listen(PORT, () => {
     console.log("The server is running at port "+Port)
 })
