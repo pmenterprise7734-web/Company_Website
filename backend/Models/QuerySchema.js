@@ -12,6 +12,7 @@ const QuerySchema = new mongoose.Schema({
     website:String,
     comment:String, 
     prodquery:Boolean,
+    read:Boolean,
     product:{
         id:String,
         model:String,
