@@ -13,7 +13,7 @@ export default function AdminEnquiryDesk() {
 
   useEffect(() => {
     CallQueryData()
-  },[])
+  },[ProdQueries, OtherQueries])
 
   const CallQueryData = async() => {
     const response = await fetch(`https://company-website-cw4n.onrender.com/Query/getAllQuery`)
@@ -25,7 +25,7 @@ export default function AdminEnquiryDesk() {
   }
 
   const readChange = async(Id) => {
-    const response = await fetch(`http://192.168.0.130:5000/Query/readStatusChange/${Id}`,{
+    const response = await fetch(`https://company-website-cw4n.onrender.com/Query/readStatusChange/${Id}`,{
       method:'PUT',
       headers: {
         "Content-Type": "application/json"
@@ -72,7 +72,11 @@ export default function AdminEnquiryDesk() {
                           <div className='flex flex-[0.5] justify-center items-center flex-col'>
                             <Link onClick={() => {readChange(item._id)}}><ChevronRight className='w-[40px] h-[40px] border-2 border-[#FFF] rounded-[5px]'/></Link>
                           </div>
-                          <Star className='absolute h-[30px] w-[30px] text-[#1bab16] right-0 m-6'/>
+                          {
+                            item?.read === false
+                            ?<Star className='absolute h-[30px] w-[30px] text-[#1bab16] right-0 m-6'/>
+                            :<Star className='hidden'/>
+                          }
                         </div>
                       )
                     })
@@ -87,7 +91,7 @@ export default function AdminEnquiryDesk() {
                   OtherQueries?.length>0? (
                     OtherQueries.map((item) => {
                       return(
-                        <div key={item._id} className='flex flex-row rounded-[5px] bg-[#f2f2f2]'>
+                        <div key={item._id} className='relative flex flex-row rounded-[5px] bg-[#f2f2f2]'>
                           <div className='flex flex-[2] flex-col gap-1 p-5'>
                               <p className='text-xs md:text-base'>Name: <span className='text-sm md:text-lg leading-none font-bold'>{(item.name).length > 30? item.name.slice(0,30)+"..." : item.name}</span></p>
                               <p className='text-xs md:text-base'>Company: <span className='text-sm md:text-lg leading-none font-bold'>{(item.company).length > 30? item.name.slice(0,30)+"..." : item.company}</span></p>
@@ -102,6 +106,11 @@ export default function AdminEnquiryDesk() {
                           <div className='flex flex-[1] justify-center items-center flex-col'>
                             <Link><ChevronRight className='w-[40px] h-[40px] border-2 border-[#FFF] rounded-[5px]'/></Link>
                           </div>
+                          {
+                            item?.read === false
+                            ?<Star className='absolute h-[30px] w-[30px] text-[#1bab16] right-0 m-6'/>
+                            :<Star className='hidden'/>
+                          }
                         </div>
                       )
                     })
@@ -113,6 +122,7 @@ export default function AdminEnquiryDesk() {
             ) 
           }
         </div>
+        <div className='flex h-[50px] flex-shrink-0'></div>
       </div>
     </div>
   )
