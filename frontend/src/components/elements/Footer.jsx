@@ -119,9 +119,24 @@ const onSubmit = async() => {
           <Link to={'/'} className='flex w-full my-4 justify-center' >
             <img src='/Logo/PMlogo.png' className='w-[90%] md:w-[100%] lg:w-[70%] rounded-[10px]'/>
           </Link>
-          <p className='text-xs md:text-sm lg:text-lg text-[#bfbfbf]'>email: pmenterprise123@gmail.com</p>
-          <p className='text-xs md:text-sm lg:text-md text-[#bfbfbf]'>email(alt): office@weightkart.in</p>
-          <p className='text-xs md:text-sm lg:text-md mb-6 text-[#bfbfbf]'>contact: +91 96098 89162</p>
+          <p className='text-sm md:text-md lg:text-lg text-[#bfbfbf]'>email: <a href='mailto:pmenterprise143@gmail.com'>pmenterprise143@gmail.com</a></p>
+          <p className='text-sm md:text-md lg:text-lg mb-4 text-[#bfbfbf]'>contact: <a href='tel:+919609889162'>+91 96098 89162</a></p>
+          <div className='flex flex-row justify-center items-center w-full mb-4 md:mb-0 gap-2 md:gap-4'>
+            <div className='flex h-full'>
+              <div className='flex flex-row items-center gap-2'>
+                <a href='' target='_blank'><img src='Logo/FB.png' className='w-[40px] aspect-square '/></a>
+                <a href='' target='_blank'><img src='Logo/Insta.png' className='w-[40px] rounded-[5px] aspect-square '/></a>
+                <a href='https://wa.me/919609889162' target='_blank'><img src='Logo/WP.png' className='w-[40px] rounded-[5px] aspect-square '/></a>
+                <p className='text-[#f2f2f2] hidden md:block text-lg'>PM Enterprise</p>
+              </div>
+            </div>
+            <div className='flex h-[40px] md:h-full border border-[#f2f2f2]'></div>
+            <div className='flex h-full flex-col items-center justify-center gap-[2px]'>
+              <p className='text-xs md:text-sm lg:text-md text-[#bfbfbf]'>email(alt): <a href='mailto:office@weightkart.in'>office@weightkart.in</a></p>
+              <p className='text-xs md:text-sm lg:text-md text-[#bfbfbf]'>contact(alt): <a href='tel:+919734637734'>+91 97346 37734</a></p>
+            </div>
+          </div>
+          
         </div>
       </div>
 

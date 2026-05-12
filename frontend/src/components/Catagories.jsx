@@ -32,9 +32,9 @@ export default function Catagories() {
 
   return (
     <div className='flex flex-col min-h-screen w-full '>
-      <div className='flex flex-row justify-between items-end pr-10'>
+      <div className='flex flex-row justify-between pr-10 mt-4'>
         <HeadingButtons text='Catagories'/>
-        <TextField select label="company" value={FilterCompany} className='w-[15vw]'
+        <TextField select label="company" value={FilterCompany} className='md:w-[15vw]'
         onChange={(e) => setFilterCompany(e.target.value)}>
             <MenuItem value={"All"}>All</MenuItem>
             <MenuItem value={"WeightKart"}>WeightKart</MenuItem>
@@ -42,7 +42,7 @@ export default function Catagories() {
         </TextField>
       </div>
 
-      <div className='flex flex-row flex-wrap justify-center items-center my-10'>
+      <div className='flex flex-row flex-wrap justify-center items-center my-4 md:my-10'>
         {
           AllCatagory?.map((item) => {
             if (item.status == true){

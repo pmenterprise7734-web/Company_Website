@@ -113,24 +113,24 @@ export default function ProductShow({Products, EmptyText}) {
   }
 
   return (
-    <div className='flex flex-row flex-wrap gap-10 my-10 mx-[5%] w-full'>
+    <div className='flex flex-row flex-wrap justify-around md:justify-start md:gap-10 my-4 md:my-10 md:mx-[5%] w-full'>
         {
             Products && Products.length>0 ? (
               Products.map((item) => {
                 return(
-                  <div key={item._id} className='flex flex-col w-[20%] aspect-[4/5] border-2 border-[#FFB720] rounded-b-[20px]'>
+                  <div key={item._id} className='flex flex-col w-[45%] md:w-[20%] aspect-[4/5] border-2 border-[#FFB720] rounded-b-[20px] my-2 '>
                     <div className='flex flex-col justify-between h-[75%] w-[full] cursor-pointer' style={{backgroundImage:`url(${item.picture})`, backgroundSize:'cover', backgroundPosition:'center'}}
                     onClick={() => {console.log("Link was touched")}}>
                       <div className='flex flex-row w-full justify-end items-start'>
                         <div className='flex flex-col m-2 gap-2'>
-                          <p className='text-[#fff] font-medium self-end text-xs px-4 py-1 bg-[rgba(148,148,148,0.78)] rounded-[15px] cursor-default'>{item.pansize}</p>
-                          <p className='text-[#FFF] font-medium self-end text-[12px] px-4 py-1 bg-[rgba(255,183,32,0.83)] rounded-[15px] cursor-default'>{item.company}</p>
+                          <p className='text-[#fff] font-medium self-end text-xs px-2 md:px-4 md:py-1 bg-[rgba(148,148,148,0.78)] rounded-[15px] cursor-default'>{item.pansize}</p>
+                          <p className='text-[#FFF] font-medium self-end text-xs md:text-[12px] px-2 md:px-4 md:py-1 bg-[rgba(255,183,32,0.83)] rounded-[15px] cursor-default'>{item.company}</p>
                         </div>
                       </div>
          
-                      <div className='flex flex-col m-2 gap-2 items-end' >
-                        <p className='text-[#828282] font-medium italic text-xs px-6 py-1 bg-[#EFEFEF] rounded-[15px] cursor-default'>Accuracy: {item.accuracy}</p>
-                        <p className='flex text-[#FFF] font-medium text-[20px] px-6 py-1 bg-[#FFB720] rounded-[15px] items-center cursor-pointer hover:scale-105 duration-200 active:scale-95'
+                      <div className='flex flex-col m-2 gap-1 md:gap-2 items-end' >
+                        <p className='text-[#828282] font-medium italic text-xs px-2 md:px-6 md:py-1 bg-[#EFEFEF] rounded-[15px] cursor-default'>Accuracy: {item.accuracy}</p>
+                        <p className='flex text-[#FFF] font-medium text-sm md:text-[20px] px-4 md:px-6 py-1 md:py-2 bg-[#FFB720] rounded-[15px] items-center cursor-pointer hover:scale-105 duration-200 active:scale-95'
                         onClick={(e) => {
                           e.stopPropagation(); 
                           e.preventDefault(); 
@@ -138,21 +138,19 @@ export default function ProductShow({Products, EmptyText}) {
                           setProdData({...ProdData, id:item._id, company:item.company, catagory:item.catagory, name:item.name, model:item.model, capacity:item.capacity, pansize:item.pansize, accuracy:item.accuracy, desc:item.desc, picture:item.picture })
                           }}>enquire <MoveUpRight size={20}/> </p>
                       </div>
-        
-                            
                     </div>
                           
                     <div className='flex flex-col h-[25%] w-full items-center justify-center'>
                       <div className='flex w-full flex-col justify-center items-center'>
-                        <p className='text-[#454443] font-medium text-[16px] text-center my-0'>
+                        <p className='text-[#454443] font-medium text-xs md:text-[16px] text-center my-0'>
                           {
-                            (item.name).length > 30? item.name.slice(0,40)+"..." : item.name
+                            (item.name).length > 30? item.name.slice(0,30)+"..." : item.name
                           }
                         </p>
                       </div>
                       <div className='flex flex-row w-full justify-around items-center overflow-hidden py-1'>
-                        <p className='text-[10px] text-[#5A5958] px-4 py-1 border border-[rgba(161,161,161,0.4)] rounded-[10px] '>Model: {item.model}</p>
-                        <p className='text-[12px] text-[#5A5958] italic px-4 py-1 bg-[#e6e6e6] rounded-full'>{item.capacity}</p>
+                        <p className='text-[10px] text-[#5A5958] px-1 md:px-4 py-1 border border-[rgba(161,161,161,0.4)] rounded-[10px] '>Model: {item.model}</p>
+                        <p className='text-[12px] text-[#5A5958] italic px-1 md:px-4 py-1 bg-[#e6e6e6] rounded-full'>{item.capacity}</p>
                       </div>
                     </div>
                   </div> 
@@ -165,9 +163,9 @@ export default function ProductShow({Products, EmptyText}) {
 
         <Modal open={enquireModal} onClose={onCloseEnquireModal}>
           <div className='flex flex-col h-screen w-full bg-[rgba(0,0,0,0.8)] justify-center items-center'>
-            <div className='flex w-[60%] rounded-[20px] bg-[#FFF]'>
+            <div className='flex flex-col md:flex-row w-[90%] md:w-[60%] rounded-[20px] bg-[#FFF] px-2 py-6 overflow-y-auto mt-[10px]'>
 
-              <div className='flex flex-col w-[40%] gap-4 justify-center '>
+              <div className='flex flex-col w-full md:w-[40%] gap-4 justify-center '>
                 <div className='flex flex-col w-[80%] aspect-[4/5] border border-[#FFB720] rounded-b-[20px] mx-auto'>
                     <div className='flex flex-col justify-between h-[75%] w-[full] cursor-pointer' style={{backgroundImage:`url(${ProdData.picture})`, backgroundSize:'cover', backgroundPosition:'center'}}
                     onClick={() => {console.log("Link was touched")}}>
@@ -198,11 +196,11 @@ export default function ProductShow({Products, EmptyText}) {
                   </div>
 
                   <div className='flex w-full justify-center items-center'>
-                    <TextField label="Qtn." type='number' inputProps={{min:1}} className='w-[30%] m-auto' sx={whiteStyles} value={ProdData.quantity} required onChange={(e) => setProdData({...ProdData, quantity: e.target.value})}/>
+                    <TextField label="Quantity" type='number' inputProps={{min:1}} className=' w-[80%] m-auto ' sx={whiteStyles} value={ProdData.quantity} required onChange={(e) => setProdData({...ProdData, quantity: e.target.value})}/>
                   </div>
               </div>
 
-              <div className='flex w-[60%]'>
+              <div className='flex w-full md:w-[60%]'>
                 <div className='grid grid-cols-6 gap-4 p-2 my-4 mx-4'>
                   <TextField label="Name" fullWidth sx={whiteStyles} className='col-span-3' value={form.name} required onChange={(e) => setForm({...form, name:e.target.value})}/>
                   <TextField label="Company" fullWidth sx={whiteStyles} className='col-span-3' value={form.company} onChange={(e) => setForm({...form, company :e.target.value})}/>
@@ -226,9 +224,9 @@ export default function ProductShow({Products, EmptyText}) {
 
         <Modal open={ConfirmationModal} onClose={onCloseConfirmationModal}>
           <div className='flex flex-col h-screen w-full bg-[rgba(0,0,0,0.9)] justify-center items-center'>
-            <div className='flex flex-col px-16 py-10 bg-[#FFF] rounded-[10px] justify-center items-center my-4'>
-              <p className='text-[#14b319] text-2xl my-10 font-bold'>Your Query Has been Submitted Successfully</p>
-              <p className='text-[#14b319]'>you'll get a callback from our team soon.</p>
+            <div className='flex w-[90%] flex-col px-6 py-10 md:px-16 bg-[#FFF] rounded-[10px] justify-center items-center my-4'>
+              <p className='w-full text-[#14b319] text-center text-2xl my-4 md:my-10 font-bold'>Your Query Has been Submitted Successfully</p>
+              <p className='w-full text-[#14b319] text-center'>you'll get a callback from our team soon</p>
             </div>
             <p className='text-[#FFF] bg-[#14b319] py-4 px-8 rounded-[10px] cursor-pointer hover:scale-110 active:scale-90 duration-200' onClick={() => {onCloseConfirmationModal()}}>Ok </p>
           </div>

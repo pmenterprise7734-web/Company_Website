@@ -91,7 +91,7 @@ function HomePage() {
       {/* Catagories Section */}
       <div className='flex flex-col bg-[#f5f5f5]'>
         <HeadingButtons text='Catagories'/>
-        <div className='flex flex-col items-center mx-[5%] my-10' >
+        <div className='flex flex-col items-center md:mx-[5%] my-6 md:my-10' >
           <div className='flex flex-row overflow-x-auto w-full py-[5px] no-scrollbar'>
             {
               AllCatagory?.map((item) => {
@@ -101,9 +101,9 @@ function HomePage() {
                   )
                 }
               })
-            }            
+            }
           </div>
-          <p className='flex gap-1 items-center text-[#00000f] text-sm my-8'>we are here to help in your business <p className='flex flex-row items-center text-[#FFB720]'>needs. <MoveUpRight/></p> </p>
+          <p className='flex gap-1 items-center text-[#00000f] text-xs md:text-sm my-4 md:my-8'>we are here to help in your business <p className='flex flex-row items-center text-[#FFB720]'>needs. <MoveUpRight/></p> </p>
         </div>
       </div>
 
@@ -120,10 +120,8 @@ function HomePage() {
       <div className='flex flex-col bg-[#f5f5f5]'>
         <HeadingButtons text='Top Selling products'/>
           <ProductShow Products={TopProdData} EmptyText={"Something went wrong! PLEASE TRY AGAIN LATER"} />
-          <p className='flex gap-1 items-center text-[#00000f] text-sm my-8 self-center'>enjoy our most selling <p className='flex flex-row items-center text-[#FFB720]'>Top Products. <MoveUpRight/></p> </p>
+          <p className='flex gap-1 items-center text-[#00000f] text-xs md:text-sm mb-4 md:my-8 self-center'>enjoy our most selling <p className='flex flex-row items-center text-[#FFB720]'>Top Products. <MoveUpRight/></p> </p>
       </div>
-      
-
     </div>
   )
 }

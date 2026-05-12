@@ -30,11 +30,11 @@ export default function ProductList() {
 
 
   return (
-    <div className='flex flex-col min-h-screen w-full'>
-        <div className='flex flex-row justify-between items-end pr-10'>
+    <div className='flex flex-col min-h-screen w-full mt-[15px]'>
+        <div className='flex flex-row justify-between items-center pr-4 md:pr-10'>
             <HeadingButtons text="Products"/>
 
-            <TextField select label="company" value={FilterCompany} className='w-[10vw] mt-6'
+            <TextField select label="company" value={FilterCompany} className='md:w-[10vw] mt-0'
             onChange={(e) => setFilterCompany(e.target.value)}>
                 <MenuItem value={"All"}>All</MenuItem>
                 <MenuItem value={"WeightKart"}>WeightKart</MenuItem>
