@@ -19,6 +19,7 @@ router.post("/AddQuery", async(req,res) => {
             website:website,
             comment:comment, 
             prodquery:prodquery,
+            read:false,
             product:{
                 id:product?.id || "na",
                 model: product?.model || "na",
