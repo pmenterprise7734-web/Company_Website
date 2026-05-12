@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom"
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Star } from 'lucide-react';
 
 
 
@@ -24,6 +24,14 @@ export default function AdminEnquiryDesk() {
     console.log(data.data)
   }
 
+  const readChange = async(Id) => {
+    const response = await fetch(`http://192.168.0.130:5000/Query/readStatusChange/${Id}`,{
+      method:'PUT',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+  }
 
 
   return (
@@ -42,7 +50,7 @@ export default function AdminEnquiryDesk() {
                   ProdQueries?.length>0? (
                     ProdQueries.map((item) => {
                       return(
-                        <div key={item._id} className='flex flex-row rounded-[5px] bg-[#f2f2f2]'>
+                        <div key={item._id} className='relative flex flex-row rounded-[5px] bg-[#f2f2f2]'>
                           <div className='flex flex-col flex-[2] md:flex-[1.2] justify-center items-center'>
                             <img src={item.product.picture} className='w-full aspect-square'/>
                             <div className='flex flex-col md:flex-row w-full justify-around py-2'>
@@ -62,8 +70,9 @@ export default function AdminEnquiryDesk() {
                               <p className='text-md'>Query: <span className='text-md leading-none '>{item.comment}</span></p>
                           </div>
                           <div className='flex flex-[0.5] justify-center items-center flex-col'>
-                            <Link><ChevronRight className='w-[40px] h-[40px] border-2 border-[#FFF] rounded-[5px]'/></Link>
+                            <Link onClick={() => {readChange(item._id)}}><ChevronRight className='w-[40px] h-[40px] border-2 border-[#FFF] rounded-[5px]'/></Link>
                           </div>
+                          <Star className='absolute h-[30px] w-[30px] text-[#1bab16] right-0 m-6'/>
                         </div>
                       )
                     })

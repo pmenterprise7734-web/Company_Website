@@ -55,7 +55,24 @@ router.get("/getAllQuery", async(req, res) => {
     }
 })
 
+router.put("/readStatusChange/:id", async(req,res) => {
+    try {
+        const UpdateData = await query_schema.findByIdAndUpdate( req.params.id, {
+            read:true
+        },{
+            new:true
+        })
 
+        res.json({
+            success:true,
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message:error.message
+        })
+    }
+})
 
 
 module.exports = router
