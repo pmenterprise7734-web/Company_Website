@@ -124,7 +124,7 @@ const onSubmit = async() => {
           <div className='flex flex-row justify-center items-center w-full mb-4 md:mb-0 gap-2 md:gap-4'>
             <div className='flex h-full'>
               <div className='flex flex-row items-center gap-2'>
-                <a href='' target='_blank'><img src='Logo/FB.png' className='w-[40px] aspect-square '/></a>
+                <a href='https://www.facebook.com/share/1BG1itJMn5/' target='_blank'><img src='Logo/FB.png' className='w-[40px] aspect-square '/></a>
                 <a href='' target='_blank'><img src='Logo/Insta.png' className='w-[40px] rounded-[5px] aspect-square '/></a>
                 <a href='https://wa.me/919609889162' target='_blank'><img src='Logo/WP.png' className='w-[40px] rounded-[5px] aspect-square '/></a>
                 <p className='text-[#f2f2f2] hidden md:block text-lg'>PM Enterprise</p>
