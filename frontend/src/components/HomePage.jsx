@@ -4,6 +4,7 @@ import HeadingButtons from './elements/HeadingButtons'
 import BrandShow from './elements/BrandShow'
 import CatagoryShow from './elements/CatagoryShow'
 import ProductShow from './elements/ProductShow'
+import { Skeleton } from '@mui/material'
 
 import { MoveUpRight } from 'lucide-react';
 
@@ -48,7 +49,8 @@ function HomePage() {
     }
 
 
-  return (
+  if(AllCatagory.length !== 0){
+    return (
     <div className='flex flex-col min-h-screen w-full overflow-x-hidden'>
     {/* Banner Section */}
     {
@@ -74,7 +76,7 @@ function HomePage() {
           }
       </Swiper>
       ) : (
-        <div className='text-[#000] bg-[#FFF] px-20 py-5'>There is nothing To show</div>
+        <div className='text-[#000] bg-[#FFF] px-20 py-5'></div>
       )
     }
 
@@ -124,6 +126,24 @@ function HomePage() {
       </div>
     </div>
   )
+  } else {
+    return(
+      <div className='flex flex-col flex-1 h-screen w-full items-center '>
+        <div className='flex flex-col h-full w-[80%] items-center gap-4 mt-4'>
+          <Skeleton variant='rectangular' height={'50%'} width={'100%'} className='rounded-[10px]' sx={{bgcolor:'#FFB72080'}} />
+          <div className='flex flex-row h-[20%] w-full gap-4'>
+            <Skeleton variant='rectangular' height={'100%'} width={'100%'} className='rounded-[10px]' sx={{bgcolor:'#FFB72080'}} />
+            <Skeleton variant='rectangular' height={'100%'} width={'100%'} className='rounded-[10px]' sx={{bgcolor:'#FFB72080'}} />
+          </div>
+          <div className='flex flex-row h-[20%] w-full gap-4'>
+            <Skeleton variant='rectangular' height={'100%'} width={'100%'} className='rounded-[10px]' sx={{bgcolor:'#FFB72080'}} />
+            <Skeleton variant='rectangular' height={'100%'} width={'100%'} className='rounded-[10px]' sx={{bgcolor:'#FFB72080'}} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
 }
 
 export default HomePage
