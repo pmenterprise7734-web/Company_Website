@@ -18,7 +18,8 @@ ConnectDB()
 app.use(cors(({
     origin: [
         "http://localhost:3000",
-        "https://weightkart.in"
+        "https://weightkart.in",
+        "https://www.weightkart.in",
     ]
 })));
 app.use(express.json());
