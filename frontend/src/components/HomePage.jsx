@@ -16,7 +16,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
 
-const AboutUsText = "PM Enterprise is a trusted provider of electronic weighing scales, weighing systems, and agricultural solutions, dedicated to delivering quality products at competitive prices. With a strong commitment to accuracy, reliability, and customer satisfaction, we serve businesses, retailers, industries, and the farming community with products designed to meet modern requirements. We believe in offering dependable solutions backed by quality standards and excellent service support. Our range of weighing equipment is known for precision, durability, and ease of use, helping customers improve operational efficiency and productivity. Alongside our weighing solutions, we support the agricultural sector with products and services that contribute to better farm management and growth."
+const AboutUs = "PM Enterprise is a modern business website developed to provide customers with an easy and efficient way to explore products and submit enquiries online. The project was designed with the objective of creating a professional digital presence for the company while ensuring a smooth user experience. In today's competitive business environment, having a well-designed website is essential for reaching customers and improving communication. This project successfully fulfills those requirements through the implementation of modern web technologies. The website was developed using the MERN stack, which consists of MongoDB, Express.js, React.js, and Node.js. This technology stack was selected because of its scalability, performance, and ability to support modern web applications. The frontend of the application was built using React.js, enabling the creation of a responsive and interactive user interface. Tailwind CSS was used for styling, allowing rapid development and consistent design throughout the website."
 
 function HomePage() {
   const [TopProdData, setTopProdData] = useState([]);
@@ -202,12 +202,12 @@ function HomePage() {
         </div>
 
         {/* About Section */}
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-3">
           <HeadingButtons text="About Us" />
           <div
-            className="flex w-[90%] mt-10 aspect-[10/2]  rounded-[20px] self-center"
+            className="flex w-[90%] mt-4 md:mt-10 aspect-[10/2]  rounded-[20px] self-center"
             style={{
-              backgroundImage: `url(/Banners/Motivation.png)`,
+              backgroundImage: `url(/Banners/Test4.jpg)`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -215,26 +215,29 @@ function HomePage() {
           <div className="flex flex-row w-[90%] self-center items-stretch">
             <div className="flex flex-col w-[40%] rounded-[20px] self-center">
               <div
-                className="flex w-full mt-4 aspect-[10/3]  rounded-[20px]"
+                className="flex w-full mt-2 md:mt-4 aspect-[10/5] md:aspect-[10/3]  rounded-[20px]"
                 style={{
-                  backgroundImage: `url(/Banners/Motivation.png)`,
+                  backgroundImage: `url(/Banners/Test2.webp)`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}>
               </div>
               <div
-                className="flex full my-4 aspect-[10/3]  rounded-[20px] "
+                className="flex full my-2 md:my-4 aspect-[10/5] md:aspect-[10/3]  rounded-[20px] "
                 style={{
-                  backgroundImage: `url(/Banners/Motivation.png)`,
+                  backgroundImage: `url(/Banners/Test3.webp)`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}>
               </div>
             </div>
 
-            <div className="flex flex-col max-h-[30vw] w-[60%] text-justify py-4 px-8 border-2 overflow-hidden">
-                <p className="text-[24px] md:text-[34px] 2xl:text-[44px] font-bold text-black/60">P.M Enterprise.</p>
-                <p className="text-[20px] text-black/50 font-normal" >{AboutUsText}</p>
+            <div className="flex flex-col h-[43vw] md:h-[26vw] w-[60%] text-justify pl-4 py-2 md:py-4 md:pl-8 ">
+                <p className="text-[16px] md:text-[24px] md:text-[34px] 2xl:text-[44px] font-bold text-black/60">P.M Enterprise.</p>
+                <div className="md:mb-4 overflow-hidden ">
+                  <p className="text-[12px] md:text-[20px] text-black/50 font-normal" >{AboutUs}</p>
+                </div>
+                <Link to={"/AboutUs"} className="text-[12px] mt-1 md:text-[16px] px-2 md:px-4 py-1 border border-[#FFB720] rounded-[4px] self-start hover:bg-[#FFB720]/30">... Read More</Link>
             </div>
           </div>
         </div>
