@@ -5,7 +5,7 @@ import BrandShow from "./elements/BrandShow";
 import CatagoryShow from "./elements/CatagoryShow";
 import ProductShow from "./elements/ProductShow";
 import { Skeleton } from "@mui/material";
-import { MoveRight } from 'lucide-react';
+import { MoveRight } from "lucide-react";
 
 import { MoveUpRight } from "lucide-react";
 
@@ -14,6 +14,9 @@ import "swiper/css";
 import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+
+
+const AboutUsText = "PM Enterprise is a trusted provider of electronic weighing scales, weighing systems, and agricultural solutions, dedicated to delivering quality products at competitive prices. With a strong commitment to accuracy, reliability, and customer satisfaction, we serve businesses, retailers, industries, and the farming community with products designed to meet modern requirements. We believe in offering dependable solutions backed by quality standards and excellent service support. Our range of weighing equipment is known for precision, durability, and ease of use, helping customers improve operational efficiency and productivity. Alongside our weighing solutions, we support the agricultural sector with products and services that contribute to better farm management and growth."
 
 function HomePage() {
   const [TopProdData, setTopProdData] = useState([]);
@@ -53,13 +56,13 @@ function HomePage() {
   }, [containerVisible, visibleCount]);
 
   // repeat the whole word + button animation every 15s
-useEffect(() => {
-  const repeatTimer = setInterval(() => {
-    setButtonVisible(false);
-    setVisibleCount(0);
-  }, 8000);
-  return () => clearInterval(repeatTimer);
-}, []);
+  useEffect(() => {
+    const repeatTimer = setInterval(() => {
+      setButtonVisible(false);
+      setVisibleCount(0);
+    }, 8000);
+    return () => clearInterval(repeatTimer);
+  }, []);
 
   const GetAllCatagory = async () => {
     const response = await fetch(
@@ -142,7 +145,8 @@ useEffect(() => {
                     : word.from === "left"
                       ? "opacity-0 -translate-x-24"
                       : "opacity-0 translate-x-24"
-                }`}>
+                }`}
+              >
                 {word.text}
               </span>
             ))}
@@ -152,9 +156,10 @@ useEffect(() => {
                 buttonVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-2"
-              }`} to={"/Catagories"}
+              }`}
+              to={"/Catagories"}
             >
-              Explore <MoveRight className="ml-2"/>
+              Explore <MoveRight className="ml-2" />
             </Link>
           </div>
         </div>
@@ -200,13 +205,38 @@ useEffect(() => {
         <div className="flex flex-col">
           <HeadingButtons text="About Us" />
           <div
-            className="flex w-[90%] my-10 aspect-[10/3]  rounded-[20px] self-center"
+            className="flex w-[90%] mt-10 aspect-[10/2]  rounded-[20px] self-center"
             style={{
               backgroundImage: `url(/Banners/Motivation.png)`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           ></div>
+          <div className="flex flex-row w-[90%] self-center items-stretch">
+            <div className="flex flex-col w-[40%] rounded-[20px] self-center">
+              <div
+                className="flex w-full mt-4 aspect-[10/3]  rounded-[20px]"
+                style={{
+                  backgroundImage: `url(/Banners/Motivation.png)`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}>
+              </div>
+              <div
+                className="flex full my-4 aspect-[10/3]  rounded-[20px] "
+                style={{
+                  backgroundImage: `url(/Banners/Motivation.png)`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}>
+              </div>
+            </div>
+
+            <div className="flex flex-col max-h-[30vw] w-[60%] text-justify py-4 px-8 border-2 overflow-hidden">
+                <p className="text-[24px] md:text-[34px] 2xl:text-[44px] font-bold text-black/60">P.M Enterprise.</p>
+                <p className="text-[20px] text-black/50 font-normal" >{AboutUsText}</p>
+            </div>
+          </div>
         </div>
 
         {/* Top product Section */}
