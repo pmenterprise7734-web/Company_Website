@@ -162,8 +162,8 @@ export default function ProductShow({Products, EmptyText}) {
         }
 
         <Modal open={enquireModal} onClose={onCloseEnquireModal}>
-          <div className='flex flex-col h-screen w-full bg-[rgba(0,0,0,0.8)] justify-center items-center'>
-            <div className='flex flex-col md:flex-row w-[90%] md:w-[60%] rounded-[20px] bg-[#FFF] px-2 py-6 overflow-y-auto mt-[10px]'>
+          <div className='flex flex-col h-screen w-full bg-[rgba(0,0,0,0.8)] md:justify-center items-center'>
+            <div className='flex h-[80vh] md:h-auto flex-col md:flex-row w-[90%] md:w-[60%] rounded-[4px] bg-[#FFF] px-2 py-6 overflow-y-auto mt-[10px]'>
 
               <div className='flex flex-col w-full md:w-[40%] gap-4 justify-center '>
                 <div className='flex flex-col w-[80%] aspect-[4/5] border border-[#FFB720] rounded-b-[20px] mx-auto'>
@@ -216,8 +216,8 @@ export default function ProductShow({Products, EmptyText}) {
             </div>
 
             <div className='flex flex-row justify-center gap-6 items-center my-4'>
-              <p className='bg-[#c71a1a] text-[#FFF] py-4 px-10 rounded-[10px] cursor-pointer hover:scale-[1.05] duration-200 active:scale-[0.95]' onClick={onCloseEnquireModal}>Cancel</p>
-              <p className='bg-[#14b319] text-[#FFF] py-4 px-10 rounded-[10px] cursor-pointer hover:scale-[1.05] duration-200 active:scale-[0.95]' onClick={Submit}>Submit Enquiry</p>
+              <p className='bg-[#c71a1a] text-[#FFF] py-4 px-10 rounded-[4px] cursor-pointer hover:scale-[1.05] duration-200 active:scale-[0.95]' onClick={onCloseEnquireModal}>Cancel</p>
+              <p className='bg-[#14b319] text-[#FFF] py-4 px-10 rounded-[4px] cursor-pointer hover:scale-[1.05] duration-200 active:scale-[0.95]' onClick={Submit}>Submit Enquiry</p>
             </div>
           </div>
         </Modal>

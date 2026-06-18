@@ -25,11 +25,15 @@ import NavBar from './components/elements/NavBar'
 //Footer element
 import Footer from './components/elements/Footer'
 
+//ScrollToTop of every page
+import ScrollToTop from './components/elements/ScrollToTop'
+
 
 export default function App() {
   return (
     <div>
       <BrowserRouter>
+        <ScrollToTop/>
         <Routes>
           <Route element={<MainLayout/>}>
             <Route exact path="/" element={<HomePage/>} />

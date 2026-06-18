@@ -16,7 +16,10 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
 
-const AboutUs = "PM Enterprise is a modern business website developed to provide customers with an easy and efficient way to explore products and submit enquiries online. The project was designed with the objective of creating a professional digital presence for the company while ensuring a smooth user experience. In today's competitive business environment, having a well-designed website is essential for reaching customers and improving communication. This project successfully fulfills those requirements through the implementation of modern web technologies. The website was developed using the MERN stack, which consists of MongoDB, Express.js, React.js, and Node.js. This technology stack was selected because of its scalability, performance, and ability to support modern web applications. The frontend of the application was built using React.js, enabling the creation of a responsive and interactive user interface. Tailwind CSS was used for styling, allowing rapid development and consistent design throughout the website."
+const AboutUs = [
+  "P.M Enterprise stands as a symbol of precision, reliability, and commitment in the weighing machine industry. Headquartered in Malda, West Bengal, and backed by nearly 20 years of industry experience, we specialize in manufacturing advanced weighing solutions for businesses of all sizes. Founded by Mr. Pintu Mandal, the company has grown from a regional manufacturer into a trusted name serving customers throughout India.",
+  "Our extensive product range includes weighing scales designed for retail stores, supermarkets, warehouses, manufacturing units, logistics operations, and numerous other commercial applications. With a strong focus on the B2B sector, we understand the importance of accuracy, durability, and consistency in every measurement. Each product is developed to help businesses operate more efficiently and confidently.",
+]
 
 function HomePage() {
   const [TopProdData, setTopProdData] = useState([]);
@@ -194,9 +197,9 @@ function HomePage() {
             </div>
             <p className="flex gap-1 items-center text-[#00000f] text-xs md:text-sm my-4 md:my-8">
               we are here to help in your business{" "}
-              <p className="flex flex-row items-center text-[#FFB720]">
+              <span className="flex flex-row items-center text-[#FFB720]">
                 needs. <MoveUpRight />
-              </p>{" "}
+              </span>{" "}
             </p>
           </div>
         </div>
@@ -205,7 +208,7 @@ function HomePage() {
         <div className="flex flex-col mb-3">
           <HeadingButtons text="About Us" />
           <div
-            className="flex w-[90%] mt-4 md:mt-10 aspect-[10/2]  rounded-[20px] self-center"
+            className="flex w-[90%] mt-4 md:mt-10 aspect-[10/2]  rounded-[4px] self-center"
             style={{
               backgroundImage: `url(/Banners/Test4.jpg)`,
               backgroundSize: "cover",
@@ -215,7 +218,7 @@ function HomePage() {
           <div className="flex flex-row w-[90%] self-center items-stretch">
             <div className="flex flex-col w-[40%] rounded-[20px] self-center">
               <div
-                className="flex w-full mt-2 md:mt-4 aspect-[10/5] md:aspect-[10/3]  rounded-[20px]"
+                className="flex w-full mt-2 md:mt-4 aspect-[10/5] md:aspect-[10/3]  rounded-[4px]"
                 style={{
                   backgroundImage: `url(/Banners/Test2.webp)`,
                   backgroundSize: "cover",
@@ -223,7 +226,7 @@ function HomePage() {
                 }}>
               </div>
               <div
-                className="flex full my-2 md:my-4 aspect-[10/5] md:aspect-[10/3]  rounded-[20px] "
+                className="flex full my-2 md:my-4 aspect-[10/5] md:aspect-[10/3]  rounded-[4px] "
                 style={{
                   backgroundImage: `url(/Banners/Test3.webp)`,
                   backgroundSize: "cover",
@@ -232,10 +235,14 @@ function HomePage() {
               </div>
             </div>
 
-            <div className="flex flex-col h-[43vw] md:h-[26vw] w-[60%] text-justify pl-4 py-2 md:py-4 md:pl-8 ">
+            <div className="flex flex-col h-[43vw] md:h-[26vw] w-[60%] text-justify pl-3 py-2 md:py-4 md:pl-8 ">
                 <p className="text-[16px] md:text-[24px] md:text-[34px] 2xl:text-[44px] font-bold text-black/60">P.M Enterprise.</p>
                 <div className="md:mb-4 overflow-hidden ">
-                  <p className="text-[12px] md:text-[20px] text-black/50 font-normal" >{AboutUs}</p>
+                  {
+                    AboutUs?.map((item) => (
+                      <p className="text-[12px] md:text-[18px] mb-2 text-black/50 font-normal leading-tight" >{item}</p>
+                    ))
+                  }
                 </div>
                 <Link to={"/AboutUs"} className="text-[12px] mt-1 md:text-[16px] px-2 md:px-4 py-1 border border-[#FFB720] rounded-[4px] self-start hover:bg-[#FFB720]/30">... Read More</Link>
             </div>
@@ -251,9 +258,9 @@ function HomePage() {
           />
           <p className="flex gap-1 items-center text-[#00000f] text-xs md:text-sm mb-4 md:my-8 self-center">
             enjoy our most selling{" "}
-            <p className="flex flex-row items-center text-[#FFB720]">
+            <span className="flex flex-row items-center text-[#FFB720]">
               Top Products. <MoveUpRight />
-            </p>{" "}
+            </span>{" "}
           </p>
         </div>
       </div>
