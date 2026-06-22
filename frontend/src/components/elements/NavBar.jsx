@@ -56,7 +56,7 @@ export default function NavBar() {
         </Menu>
       </div>
 
-      <div className='hidden lg:flex w-[30%] lg:w-[60%] h-full bg-[#1B1A1C] rounded-bl-[30px] justify-between border-b border-[#c4c4c4] '>
+      <div className='hidden lg:flex w-[30%] lg:w-[60%] h-full bg-[#1B1A1C] rounded-bl-[10px] justify-between border-b border-[#c4c4c4] '>
         <div className='flex flex-row w-[55%] h-full justify-around items-center ml-10'>
             <NavLink to={'/'} className={({isActive}) => `text-[#f2f2f2] hover:scale-110 hover:text-[#FFF] duration-200 cursor-pointer ${isActive? "font-bold underline underline-offset-4 decoration-2 hover:scale-100":""}`} >Home</NavLink>
             <NavLink to={'/Catagories'} className={({isActive}) => `text-[#f2f2f2] hover:scale-110 hover:text-[#FFF] duration-200 cursor-pointer ${isActive? "font-bold underline underline-offset-4 decoration-2 hover:scale-100":""}`}>Catagories</NavLink>
@@ -64,7 +64,7 @@ export default function NavBar() {
             <NavLink to={'/Gallery'} className={({isActive}) => `text-[#f2f2f2] hover:scale-110 hover:text-[#FFF] duration-200 cursor-pointer ${isActive? "font-bold underline underline-offset-4 decoration-2 hover:scale-100":""}`}>Gallery</NavLink>
         </div>
         <div className='flex w-[30%] h-full justify-around items-center '>
-            <Link to={'/'} className='flex justify-center items-center bg-[#FFB720] hover:scale-105 duration-100 rounded-[5px] px-3 py-1'>
+            <Link to={'/'} className='flex justify-center items-center bg-[#FFB720] hover:scale-[1.02] duration-100 rounded-[2px] px-3 py-1'>
                 <p className='text-[#fff] font-medium'>contact us</p>
             </Link>
         </div>

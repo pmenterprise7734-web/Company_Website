@@ -118,19 +118,19 @@ export default function ProductShow({Products, EmptyText}) {
             Products && Products.length>0 ? (
               Products.map((item) => {
                 return(
-                  <div key={item._id} className='flex flex-col w-[45%] md:w-[20%] aspect-[4/5] border-2 border-[#FFB720] rounded-b-[20px] my-2 '>
-                    <div className='flex flex-col justify-between h-[75%] w-[full] cursor-pointer' style={{backgroundImage:`url(${item.picture})`, backgroundSize:'cover', backgroundPosition:'center'}}
+                  <div key={item._id} className='flex flex-col w-[45%] md:w-[20%] aspect-[4/5] border-2 border-[#FFB720] rounded-[6px] my-2 '>
+                    <div className='flex flex-col justify-between h-[75%] w-[full] cursor-pointer rounded-t-[4px]' style={{backgroundImage:`url(${item.picture})`, backgroundSize:'cover', backgroundPosition:'center'}}
                     onClick={() => {console.log("Link was touched")}}>
                       <div className='flex flex-row w-full justify-end items-start'>
                         <div className='flex flex-col m-2 gap-2'>
-                          <p className='text-[#fff] font-medium self-end text-xs px-2 md:px-4 md:py-1 bg-[rgba(148,148,148,0.78)] rounded-[15px] cursor-default'>{item.pansize}</p>
-                          <p className='text-[#FFF] font-medium self-end text-xs md:text-[12px] px-2 md:px-4 md:py-1 bg-[rgba(255,183,32,0.83)] rounded-[15px] cursor-default'>{item.company}</p>
+                          <p className='text-[#fff] font-medium self-end text-xs px-2 md:px-4 md:py-1 bg-[rgba(148,148,148,0.78)] rounded-[4px] cursor-default'>{item.pansize}</p>
+                          <p className='text-[#FFF] font-medium self-end text-xs md:text-[12px] px-2 md:px-4 md:py-1 bg-[rgba(255,183,32,0.83)] rounded-[4px] cursor-default'>{item.company}</p>
                         </div>
                       </div>
          
                       <div className='flex flex-col m-2 gap-1 md:gap-2 items-end' >
-                        <p className='text-[#828282] font-medium italic text-xs px-2 md:px-6 md:py-1 bg-[#EFEFEF] rounded-[15px] cursor-default'>Accuracy: {item.accuracy}</p>
-                        <p className='flex text-[#FFF] font-medium text-sm md:text-[20px] px-4 md:px-6 py-1 md:py-2 bg-[#FFB720] rounded-[15px] items-center cursor-pointer hover:scale-105 duration-200 active:scale-95'
+                        <p className='text-[#828282] font-medium italic text-xs px-2 md:px-6 md:py-1 bg-[#EFEFEF] rounded-[4px] cursor-default'>Accuracy: {item.accuracy}</p>
+                        <p className='flex text-[#FFF] font-medium text-sm md:text-[20px] px-4 md:px-6 py-1 md:py-2 bg-[#FFB720] rounded-[4px] items-center cursor-pointer hover:scale-105 duration-200 active:scale-95'
                         onClick={(e) => {
                           e.stopPropagation(); 
                           e.preventDefault(); 
