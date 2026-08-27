@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { storage } from "../firebase"
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import {TextField, Modal, Switch} from '@mui/material'
 import { ImagePlus, Eye, EyeOff } from 'lucide-react'
 import { Link} from 'react-router-dom'
 
+import { getCategories, addCategory, changeVisibility } from '../firebase/service/categoryService'
+import { uploadImage } from '../firebase/service/storageService'
 
 
 export default function AdminViewAllCatagories() {
@@ -21,7 +21,7 @@ export default function AdminViewAllCatagories() {
 
     const[AddModal, setAddModal] = useState(false)
     const handleOpen = () => {setAddModal(true)}
-    const handleClose = () => {setAddModal(false); setPreviewImg(""); setCatagoryValue("")}
+    const handleClose = () => {setAddModal(false); setPreviewImg(""); setCatagoryValue("");  setCatagoryName(""); setCatagoryImg(""); setActive(true);}
 
     const[CatagoryVisibleModal, setCatagoryVisibleModal] = useState(false)
     const[CurrentSelectedCatagory, setCurrentSelectedCatagory] = useState("")
@@ -44,10 +44,13 @@ export default function AdminViewAllCatagories() {
     
     // fetching all the catagories that exists under useEffect.
     const GetAllCatagory = async() => {
-        const response = await fetch(`https://company-website-cw4n.onrender.com/catagory/getCatagory`)
-        const data = await response.json()
-        setAllCatagory(data)
-        console.log(data)
+        try {
+          const data = await getCategories();
+
+          setAllCatagory(data);
+        } catch (error) {
+          console.log(error);
+        }
     }
 
     // Submit button while adding new catagories
@@ -64,42 +67,39 @@ export default function AdminViewAllCatagories() {
             alert("Please select an Image")
             return;
         }
-        const result = await fetch(`https://company-website-cw4n.onrender.com/catagory/addCatagory`,{
-            method:'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                catagoryname:CatagoryName,
-                value:CatagoryValue,
-                picture:CatagoryImg,
-                status:Active
-            })
-        })
-        console.log(result.message)
+        try {
+          await addCategory({
+            catagoryname: CatagoryName,
+            value: CatagoryValue,
+            picture: CatagoryImg,
+            status: Active,
+          });
 
-        handleClose()
-        setReload(prev => !prev)
+          handleClose();
+
+          setReload((prev) => !prev);
+        } catch (error) {
+          console.log(error);
+
+          alert("Failed to create category");
+        }
     }
 
 
     // Changing visibily if Owner doesn't want to show some catagories or discontinuing it
     const ChangeVisibility = async() => {
-        const visibility = await fetch(`https://company-website-cw4n.onrender.com/catagory/changeVisibility`,{
-            method:'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-                id: CurrentSelectedCatagoryID,
-                status:!CurrentSelectedCatagoryStatus,
-            })
-        })
+        try {
+          await changeVisibility(
+            CurrentSelectedCatagoryID,
+            CurrentSelectedCatagoryStatus,
+          );
 
-        const res = visibility.json()
-        console.log(res)
-        CatagoryVisibleModalClose()
-        setReload(prev => !prev)
+          CatagoryVisibleModalClose();
+
+          setReload((prev) => !prev);
+        } catch (error) {
+          console.log(error);
+        }
     }
 
 
@@ -125,18 +125,18 @@ export default function AdminViewAllCatagories() {
         const previewUrl = URL.createObjectURL(selectedFile)
         setPreviewImg(previewUrl)
 
-        const fileRef = ref( storage, `images/${Date.now()}_${selectedFile.name}` )
-
         try {
-            await uploadBytes(fileRef, selectedFile)
-            const downloadUrl = await getDownloadURL(fileRef)
-            setCatagoryImg(downloadUrl)
-            console.log(downloadUrl)
-            setUploadingImg(false)
+          const downloadUrl = await uploadImage(selectedFile, "categories");
+
+          setCatagoryImg(downloadUrl);
+
+          setUploadingImg(false);
         } catch (error) {
-            console.log("error message: " + error)
-            setUploadingImg(false)
-            alert("Image Upload unsuccessful")
+          console.log(error);
+
+          setUploadingImg(false);
+
+          alert("Image Upload unsuccessful");
         }
 
     }
@@ -157,14 +157,14 @@ export default function AdminViewAllCatagories() {
                 AllCatagory?.length > 0 ? (
                     AllCatagory.map((item) => {
                         return(
-                            <div key={item._id} className='flex flex-col items-center my-5'>
+                            <div key={item.id} className='flex flex-col items-center my-5'>
                                 <Link to={`/AdminProductList/${item.value}`} className="flex h-[300px] w-[320px] rounded-[20px] bg-center my-5 bg-cover justify-end cursor-pointer hover:scale-[1.1] duration-200 active:scale-[1]" style={{ backgroundImage: `url(${item.picture})` }}>
                                     <div className='flex flex-row w-[15%] h-[15%] bg-[#000] m-5 rounded-[20px] justify-center items-center cursor-pointer hover:scale-[1.2] duration-200'
                                       title='You can turn off visibility of this catagory' 
                                       onClick={(e) => {
                                         e.stopPropagation();   // stops event bubbling to Link
                                         e.preventDefault();
-                                        CatagoryVisibleModalOpen(item.catagoryname, item._id, item.status)}}>
+                                        CatagoryVisibleModalOpen(item.catagoryname, item.id, item.status)}}>
                                         {
                                             item.status == true? <Eye className='text-[#FFF]' size={25}/> 
                                             : <EyeOff className='text-[#FFF]' size={25}/> 

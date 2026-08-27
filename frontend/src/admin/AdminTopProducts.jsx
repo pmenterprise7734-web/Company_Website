@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SquarePen, Heart } from 'lucide-react'
 import HeadingButtons from '../components/elements/HeadingButtons'
+import { getTopProducts, toggleFavorite } from '../firebase/service/productService'
+
 
 export default function AdminTopProducts() {
 
@@ -16,24 +18,25 @@ export default function AdminTopProducts() {
   },[Refresh])
 
   const CallData = async() => {
-    const response = await fetch(`https://company-website-cw4n.onrender.com/product/callTopProducts`)
-    const data = await response.json()
-    setData(data)
+    try {
+      const data = await getTopProducts();
+
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
-  const AddToFavorite = async(id) => {
-      console.log(id)
-      const response = await fetch(`https://company-website-cw4n.onrender.com/product/AddtoFavorite/${id}`, {
-        method:"POST"
-      })
+  const AddToFavorite = async(id, currentStatus) => {
+      try {
+        await toggleFavorite(id, currentStatus);
 
-      console.log(response.status)
-      if(response.status == 200){
-        setRefresh(prev=>!prev)
-      }
-      else{
-        alert("Something went wrong. Please try again later")
+        setRefresh((prev) => !prev);
+      } catch (error) {
+        console.log(error);
+
+        alert("Something went wrong. Please try again later");
       }
     }
 
@@ -46,7 +49,7 @@ export default function AdminTopProducts() {
         Data && Data.length>0 ? (
           Data.map((item) => {
             return(
-              <div className='flex flex-col w-[30%] aspect-[4/5] border-2 border-[#FFB720] rounded-b-[20px]'>
+              <div key={item.id} className='flex flex-col w-[30%] aspect-[4/5] border-2 border-[#FFB720] rounded-b-[20px]'>
                   
                   <div className='flex flex-col justify-between h-[75%] w-[full] cursor-pointer' style={{backgroundImage:`url(${item.picture})`, backgroundSize:'cover', backgroundPosition:'center'}}
                   onClick={() => {console.log("Link was touched")}}>
@@ -55,7 +58,7 @@ export default function AdminTopProducts() {
                       onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
-                        AddToFavorite(item._id)
+                        AddToFavorite(item.id, item.favorite)
                       }}><Heart/></p>
                       <div className='flex flex-col m-2 gap-2'>
                         <p className='text-[#fff] font-medium self-end text-md px-4 py-1 bg-[rgba(148,148,148,0.78)] rounded-[15px] cursor-default'>{item.pansize}</p>
@@ -68,10 +71,10 @@ export default function AdminTopProducts() {
                       onClick={(e) => {
                         e.stopPropagation(); 
                         e.preventDefault();
-                        navigate("/AdminAddProduct", { state:{name:item.name, capacity:item.capacity, catagory:item.catagory, companyname:item.company, pansize:item.pansize, accuracy:item.accuracy, description:item.desc, img:item.picture, model:item.model, id:item._id}})
+                        navigate("/AdminAddProduct", { state:{name:item.name, capacity:item.capacity, catagory:item.catagory, companyname:item.company, pansize:item.pansize, accuracy:item.accuracy, description:item.desc, img:item.picture, model:item.model, id:item.id}})
                         }}><SquarePen size={25}/></p>
                       {/* <p className='flex text-[#FFF] font-medium text-[20px] px-2 py-2 bg-[#F00] rounded-full items-center cursor-pointer hover:scale-110 duration-200 active:scale-95'
-                      onClick={(e) => {e.stopPropagation(); e.preventDefault(); setDeleteProductId(item._id); setDeleteModal(true)}}><Trash2 size={25}/> </p> */}
+                      onClick={(e) => {e.stopPropagation(); e.preventDefault(); setDeleteProductId(item.id); setDeleteModal(true)}}><Trash2 size={25}/> </p> */}
                     </div>
  
                     <div className='flex flex-col m-2 gap-2 items-end' >

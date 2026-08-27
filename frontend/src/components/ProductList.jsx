@@ -1,48 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import ProductShow from './elements/ProductShow';
-import HeadingButtons from './elements/HeadingButtons';
-import { MenuItem, TextField } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import ProductShow from "./elements/ProductShow";
+import HeadingButtons from "./elements/HeadingButtons";
+import { MenuItem, TextField } from "@mui/material";
+import { getProductsByCategory } from "../firebase/service/productService";
 
 export default function ProductList() {
+  const [SearchParams] = useSearchParams();
+  const CValue = SearchParams.get("value");
+  const BName = SearchParams.get("bname");
 
-    const [SearchParams] = useSearchParams()
-    const CValue = SearchParams.get("value")
-    const BName = SearchParams.get("bname") 
+  // console.log(location.state.value)
 
-    // console.log(location.state.value)
+  const [Products, setProducts] = useState([]);
+  const [FilterCompany, setFilterCompany] = useState(BName);
 
-    const[Products,setProducts] = useState([])
-    const[FilterCompany,setFilterCompany] = useState(BName)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    CallProductByCatagory();
+  }, [FilterCompany]);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        CallProductByCatagory()
-    },[FilterCompany])
+  const CallProductByCatagory = async () => {
+    try {
+      const data = await getProductsByCategory(CValue);
 
+      console.log(data);
 
-    const CallProductByCatagory = async() => {
-        const response = await fetch(`https://company-website-cw4n.onrender.com/product/callProductByCatagory/${CValue}`)
-        const data = await response.json()
-        console.log("Calling data: "+data)
-        setProducts(data)
+      setProducts(data);
+    } catch (error) {
+      console.log(error);
     }
-
+  }; 
 
   return (
-    <div className='flex flex-col min-h-screen w-full mt-[15px]'>
-        <div className='flex flex-row justify-between items-center pr-4 md:pr-10'>
-            <HeadingButtons text="Products"/>
+    <div className="flex flex-col min-h-screen w-full mt-[15px]">
+      <div className="flex flex-row justify-between items-center pr-4 md:pr-10">
+        <HeadingButtons text="Products" />
 
-            <TextField select label="company" value={FilterCompany} className='md:w-[10vw] mt-0'
-            onChange={(e) => setFilterCompany(e.target.value)}>
-                <MenuItem value={"All"}>All</MenuItem>
-                <MenuItem value={"WeightKart"}>WeightKart</MenuItem>
-                <MenuItem value={"Sonatta"}>Sonatta</MenuItem>
-            </TextField>
-
-        </div>
-        <ProductShow Products={FilterCompany == "All"? Products : Products.filter(p => p.company === FilterCompany) }  EmptyText={"Something went wrong, Nothing to show here."} />
+        <TextField
+          select
+          label="company"
+          value={FilterCompany}
+          className="md:w-[10vw] mt-0"
+          onChange={(e) => setFilterCompany(e.target.value)}
+        >
+          <MenuItem value={"All"}>All</MenuItem>
+          <MenuItem value={"WeightKart"}>WeightKart</MenuItem>
+          <MenuItem value={"Sonatta"}>Sonatta</MenuItem>
+        </TextField>
+      </div>
+      <ProductShow
+        Products={
+          FilterCompany === "All"
+            ? Products
+            : Products.filter((p) => p.company === FilterCompany)
+        }
+        EmptyText={"Something went wrong, Nothing to show here."}
+      />
     </div>
-  )
+  );
 }

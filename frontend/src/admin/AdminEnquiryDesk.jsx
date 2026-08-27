@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom"
 import { ChevronRight, Star } from 'lucide-react';
+import {getAllQueries, markAsRead} from '../firebase/service/queryService'
 
 
 
@@ -13,25 +14,24 @@ export default function AdminEnquiryDesk() {
 
   useEffect(() => {
     CallQueryData()
-  },[ProdQueries, OtherQueries])
+  },[])
 
   const CallQueryData = async() => {
-    const response = await fetch(`https://company-website-cw4n.onrender.com/Query/getAllQuery`)
-    const data = await response.json()
-    const dataArr = data.data
+    const dataArr = await getAllQueries();
     setProdQueries(dataArr.filter(item => item.prodquery === true))
     setOtherQueries(dataArr.filter(item => item.prodquery === false))
-    console.log(data.data)
+    console.log(dataArr)
   }
 
-  const readChange = async(Id) => {
-    const response = await fetch(`https://company-website-cw4n.onrender.com/Query/readStatusChange/${Id}`,{
-      method:'PUT',
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-  }
+  const readChange = async (id) => {
+    try {
+      await markAsRead(id);
+
+      CallQueryData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   return (
@@ -50,7 +50,7 @@ export default function AdminEnquiryDesk() {
                   ProdQueries?.length>0? (
                     ProdQueries.map((item) => {
                       return(
-                        <div key={item._id} className='relative flex flex-row rounded-[5px] bg-[#f2f2f2]'>
+                        <div key={item.id} className='relative flex flex-row rounded-[5px] bg-[#f2f2f2]'>
                           <div className='flex flex-col flex-[2] md:flex-[1.2] justify-center items-center'>
                             <img src={item.product.picture} className='w-full aspect-square'/>
                             <div className='flex flex-col md:flex-row w-full justify-around py-2'>
@@ -70,7 +70,7 @@ export default function AdminEnquiryDesk() {
                               <p className='text-md'>Query: <span className='text-md leading-none '>{item.comment}</span></p>
                           </div>
                           <div className='flex flex-[0.5] justify-center items-center flex-col'>
-                            <Link onClick={() => {readChange(item._id)}}><ChevronRight className='w-[40px] h-[40px] border-2 border-[#FFF] rounded-[5px]'/></Link>
+                            <Link onClick={() => {readChange(item.id)}}><ChevronRight className='w-[40px] h-[40px] border-2 border-[#FFF] rounded-[5px]'/></Link>
                           </div>
                           {
                             item?.read === false
@@ -91,7 +91,7 @@ export default function AdminEnquiryDesk() {
                   OtherQueries?.length>0? (
                     OtherQueries.map((item) => {
                       return(
-                        <div key={item._id} className='relative flex flex-row rounded-[5px] bg-[#f2f2f2]'>
+                        <div key={item.id} className='relative flex flex-row rounded-[5px] bg-[#f2f2f2]'>
                           <div className='flex flex-[2] flex-col gap-1 p-5'>
                               <p className='text-xs md:text-base'>Name: <span className='text-sm md:text-lg leading-none font-bold'>{(item.name).length > 30? item.name.slice(0,30)+"..." : item.name}</span></p>
                               <p className='text-xs md:text-base'>Company: <span className='text-sm md:text-lg leading-none font-bold'>{(item.company).length > 30? item.name.slice(0,30)+"..." : item.company}</span></p>

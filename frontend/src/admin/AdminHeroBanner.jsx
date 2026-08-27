@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { storage } from "../firebase"
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { Modal } from '@mui/material'
 import { ImagePlus,Trash2 } from 'lucide-react';
+import {uploadImage} from '../firebase/service/storageService'
+import { getAllBanners, addBanner, deleteBanner } from '../firebase/service/bannerService';
+
 
 export default function AdminHeroBanner() {
 
@@ -27,10 +28,9 @@ export default function AdminHeroBanner() {
     },[Reload])
 
     const getBanners = async() => {
-        const result = await fetch(`https://company-website-cw4n.onrender.com/homeBanner/getBanners`)
-        const data = await result.json()
-        setBanners(data[0].banners)
-        console.log(data[0].banners)
+       const data =  await getAllBanners();
+        setBanners(data)
+        console.log(data)
     }
 
 
@@ -49,48 +49,34 @@ export default function AdminHeroBanner() {
     }
 
 
-    const Submit = async() => {
-        const fileRef = ref( storage, `banners/${Date.now()}` )
+    const Submit = async () => {
+      try {
+        const downloadUrl = await uploadImage(SelFile, "banners");
 
-        try{
-            await uploadBytes(fileRef, SelFile)
-            const downloadUrl = await getDownloadURL(fileRef)
-            console.log(downloadUrl)
-            SaveImageLinkToDatabase(downloadUrl)
-            handleClose()
-            setPreviewUrl("")
-            setReload(prev => !prev)
-        } catch(error) {
-            console.log("Message: "+error)
-            alert("Image Upload Unsuccessful")
-            setReload(prev => !prev)
-        }
-    }
+        await addBanner(downloadUrl);
 
+        handleClose();
 
-    const SaveImageLinkToDatabase = async(url) => {
-        const result = await fetch(`https://company-website-cw4n.onrender.com/homeBanner/addBanner`,{
-            method:'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-                imgUrl: url
-            })
-        }) 
-    } 
+        setPreviewUrl("");
+
+        setReload((prev) => !prev);
+      } catch (error) {
+        console.log(error);
+
+        alert("Image Upload Unsuccessful");
+      }
+    };
+
 
 
     const DeleteBanner = async(url) => {
-        const result = await fetch(`https://company-website-cw4n.onrender.com/homeBanner/deleteBanner`,{
-            method:'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-                url: url
-            })
-        })
+         try {
+           await deleteBanner(url);
+
+           setReload((prev) => !prev);
+         } catch (error) {
+           console.log(error);
+         }
         setReload(prev => !prev) 
     }
 
@@ -116,9 +102,9 @@ export default function AdminHeroBanner() {
             {
                 Banners.map((item) => {
                     return(
-                        <div className='flex w-[40vw] aspect-[6/3] justify-end' style={{backgroundImage:`url(${item})`, backgroundSize:'cover', backgroundPosition:'center'}}>
+                        <div key={item.id} className='flex w-[40vw] aspect-[6/3] justify-end' style={{backgroundImage:`url(${item.imgUrl})`, backgroundSize:'cover', backgroundPosition:'center'}}>
                             <div className='flex justify-center items-center h-[40px] aspect-square bg-[#d60000] rounded-full m-5 hover:scale-[1.2] duration-200 active:scale-90 cursor-pointer'
-                            onClick={() => {DeleteBanner(item)}}>
+                            onClick={() => {DeleteBanner(item.id)}}>
                                 <Trash2 size={20} color='#FFF'/>
                             </div>
                         </div>

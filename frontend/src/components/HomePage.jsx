@@ -14,12 +14,14 @@ import "swiper/css";
 import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-
+import { getCategories } from "../firebase/service/categoryService";
+import { getAllBanners } from "../firebase/service/bannerService";
+import { getTopProducts } from "../firebase/service/productService";
 
 const AboutUs = [
   "P.M Enterprise stands as a symbol of precision, reliability, and commitment in the weighing machine industry. Headquartered in Malda, West Bengal, and backed by nearly 20 years of industry experience, we specialize in manufacturing advanced weighing solutions for businesses of all sizes. Founded by Mr. Pintu Mandal, the company has grown from a regional manufacturer into a trusted name serving customers throughout India.",
   "Our extensive product range includes weighing scales designed for retail stores, supermarkets, warehouses, manufacturing units, logistics operations, and numerous other commercial applications. With a strong focus on the B2B sector, we understand the importance of accuracy, durability, and consistency in every measurement. Each product is developed to help businesses operate more efficiently and confidently.",
-]
+];
 
 function HomePage() {
   const [TopProdData, setTopProdData] = useState([]);
@@ -37,7 +39,7 @@ function HomePage() {
 
   useEffect(() => {
     GetAllCatagory();
-    getBanners();
+    GetBanners();
     CallData();
   }, []);
 
@@ -68,30 +70,35 @@ function HomePage() {
   }, []);
 
   const GetAllCatagory = async () => {
-    const response = await fetch(
-      `https://company-website-cw4n.onrender.com/catagory/getCatagory`,
-    );
-    const data = await response.json();
-    setAllCatagory(data);
-    console.log(data);
+    try {
+      const data = await getCategories();
+
+      console.log(data);
+
+      setAllCatagory(data); // if you have state
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const getBanners = async () => {
-    const result = await fetch(
-      `https://company-website-cw4n.onrender.com/homeBanner/getBanners`,
-    );
-    const data = await result.json();
-    setBanners(data[0].banners);
-    // console.log(data[0].banners)
+  const GetBanners = async () => {
+    try {
+      const data = await getAllBanners();
+      console.log("Banner Data:", data);
+      setBanners(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const CallData = async () => {
-    const response = await fetch(
-      `https://company-website-cw4n.onrender.com/product/callTopProducts`,
-    );
-    const data = await response.json();
-    // console.log(data)
-    setTopProdData(data);
+    try {
+      const data = await getTopProducts();
+      console.log("Products:", data);
+      setTopProdData(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (AllCatagory.length !== 0) {
@@ -115,11 +122,11 @@ function HomePage() {
             >
               {Banners.map((item) => {
                 return (
-                  <SwiperSlide key={item}>
+                  <SwiperSlide key={item.div}>
                     <div
                       className="h-full w-full"
                       style={{
-                        backgroundImage: `url(${item})`,
+                        backgroundImage: `url(${item.imgUrl})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                       }}
@@ -223,28 +230,35 @@ function HomePage() {
                   backgroundImage: `url(/Banners/Test2.webp)`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
-                }}>
-              </div>
+                }}
+              ></div>
               <div
                 className="flex full my-2 md:my-4 aspect-[10/5] md:aspect-[10/3]  rounded-[4px] "
                 style={{
                   backgroundImage: `url(/Banners/Test3.webp)`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
-                }}>
-              </div>
+                }}
+              ></div>
             </div>
 
             <div className="flex flex-col h-[43vw] md:h-[26vw] w-[60%] text-justify pl-3 py-2 md:py-4 md:pl-8 ">
-                <p className="text-[16px] md:text-[24px] md:text-[34px] 2xl:text-[44px] font-bold text-black/60">P.M Enterprise.</p>
-                <div className="md:mb-4 overflow-hidden ">
-                  {
-                    AboutUs?.map((item) => (
-                      <p className="text-[12px] md:text-[18px] mb-2 text-black/50 font-normal leading-tight" >{item}</p>
-                    ))
-                  }
-                </div>
-                <Link to={"/AboutUs"} className="text-[12px] mt-1 md:text-[16px] px-2 md:px-4 py-1 border border-[#FFB720] rounded-[4px] self-start hover:bg-[#FFB720]/30">... Read More</Link>
+              <p className="text-[16px] md:text-[24px] md:text-[34px] 2xl:text-[44px] font-bold text-black/60">
+                P.M Enterprise.
+              </p>
+              <div className="md:mb-4 overflow-hidden ">
+                {AboutUs?.map((item) => (
+                  <p className="text-[12px] md:text-[18px] mb-2 text-black/50 font-normal leading-tight">
+                    {item}
+                  </p>
+                ))}
+              </div>
+              <Link
+                to={"/AboutUs"}
+                className="text-[12px] mt-1 md:text-[16px] px-2 md:px-4 py-1 border border-[#FFB720] rounded-[4px] self-start hover:bg-[#FFB720]/30"
+              >
+                ... Read More
+              </Link>
             </div>
           </div>
         </div>
