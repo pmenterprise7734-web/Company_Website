@@ -4,13 +4,20 @@ import { MoveRight } from 'lucide-react';
 
 export default function CatagoryShow({Name, Image, Value, BName}) {
   return (
-    <div className='flex flex-col flex-shrink-0 w-[45vw] md:w-[23vw] aspect-square items-center my-2'>
-        <div style={{backgroundImage:`url(${Image})`, backgroundSize:'cover', backgroundPosition:'center'}}
-        className='flex h-[95%] w-[80%] rounded-[6px] items-end justify-center border-2 border-[#FFB720]'>
-            <Link to={`/ProductList?value=${Value}&bname=${BName}`} className='flex text-sm md:text-lg font-medium text-[#FFF]
-            px-2 md:px-8 py-2 md:py-3  bg-[#FFB720] rounded-[10px] md:rounded-[6px] justify-center items-center mb-[-8%] hover:scale-105
-            duration-200 active:scale-90 text-center'>{Name}</Link>
+    <div className="flex flex-col flex-shrink-0 w-[45vw] md:w-[23vw] aspect-square items-center my-2 ">
+      <div className="flex flex-col h-[100%] w-[80%] rounded-[10px] items-center justify-center border border-[#FFB720]">
+        <img src={Image} className="w-full h-[75%] rounded-t-[10px]" />
+        <div className="flex flex-col h-[25%] w-full bg-[#0B1F3A] rounded-b-[10px] justify-center items-center ">
+          <p className="text-base md:text-lg text-[#FFF]">{Name}</p>
+          {/* <div className="h-[2px] w-10 bg-[#FFB720]"></div> */}
+          <Link
+            className={`group flex rounded-[4px] items-center tracking-widest text-xs md:text-xs text-[#FFB720] leading-none font-semibold hover:scale-[1.05] transition-all duration-200 ease-out`}
+            to={`/ProductList?value=${Value}&bname=${BName}`}
+          >
+            Explore <MoveRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" />
+          </Link>
         </div>
+      </div>
     </div>
-  )
+  );
 }

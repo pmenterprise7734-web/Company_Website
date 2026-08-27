@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default function HeadingButtons({text}) {
+export default function HeadingButtons({text, margin}) {
   return (
-    <div className='flex w-fit px-6 py-2 md:px-16 md:py-3 text-md md:text-2xl text-[#FFF] rounded-[4px] font-bold justify-center items-center bg-[#FFB720] mt-4 md:mt-14 ml-4 md:ml-20'>{text}</div>
+    <div className={`flex flex-col ${margin === 0? "":"ml-4 md:ml-20"}`}>
+      <p className={`flex w-fit text-lg py-2 md:text-2xl text-[#0B1F3A] font-bold justify-center items-center ${margin === 0? "":"mt-4 md:mt-14"}`}>{text}</p>
+      <div className='h-1 w-12 bg-[#FFB720] rounded-full'></div>
+    </div>
   )
 }

@@ -140,7 +140,7 @@ function HomePage() {
           )}
 
           <div
-            className={`flex flex-col absolute h-[70%] self-end aspect-[1.5/1] rounded-t-full rounded-br-full bg-gradient-to-r from-[#023e8a] via-[#023e8a]/70 to-[#023e8a]/50 z-10 justify-center items-center transition-all duration-700 ease-out ${
+            className={`flex flex-col absolute h-[50%] self-end aspect-[2/1] rounded-tl-full rounded-br-full bg-gradient-to-r from-[#023e8a] via-[#023e8a]/70 to-[#023e8a]/50 z-10 justify-center items-center transition-all duration-700 ease-out ${
               containerVisible
                 ? "translate-x-0 opacity-100"
                 : "-translate-x-full opacity-0"
@@ -149,7 +149,7 @@ function HomePage() {
             {words.map((word, i) => (
               <span
                 key={word.text}
-                className={`transition-all duration-500 text-[16px] md:text-[34px] lg:text-[54px] 2xl:text-[74px] leading-none tracking-wide italic font-extrabold ease-in-out ${word.color} ${
+                className={`transition-all duration-500 text-xl md:2xl lg:text-4xl 2xl:text-[74px] leading-none tracking-wide italic font-extrabold ease-in-out ${word.color} ${
                   i < visibleCount
                     ? "opacity-100 translate-x-0"
                     : word.from === "left"
@@ -162,7 +162,7 @@ function HomePage() {
             ))}
 
             <Link
-              className={`flex px-2 mt-2 md:px-6 md:py-1 md:mt-4 rounded-full text-[10px] md:text-[20px] xl:text-[30px] border md:border-2 border-white items-center text-white font-semibold transition-all duration-500 ease-out ${
+              className={`flex px-2 mt-2 md:px-6 md:py-2 md:mt-4 rounded-[4px] text-sm md:text-base  bg-[#FFB720] hover:scale-[1.08] items-center text-white font-semibold transition-all duration-300 ease-out ${
                 buttonVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-2"
@@ -202,7 +202,7 @@ function HomePage() {
                 }
               })}
             </div>
-            <p className="flex gap-1 items-center text-[#00000f] text-xs md:text-sm my-4 md:my-8">
+            <p className="flex gap-1 items-center text-[#0B1F3A] font-semibold text-xs md:text-sm my-4 md:my-8">
               we are here to help in your business{" "}
               <span className="flex flex-row items-center text-[#FFB720]">
                 needs. <MoveUpRight />
@@ -213,19 +213,10 @@ function HomePage() {
 
         {/* About Section */}
         <div className="flex flex-col mb-3">
-          <HeadingButtons text="About Us" />
-          <div
-            className="flex w-[90%] mt-4 md:mt-10 aspect-[10/2]  rounded-[4px] self-center"
-            style={{
-              backgroundImage: `url(/Banners/Test4.jpg)`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          ></div>
-          <div className="flex flex-row w-[90%] self-center items-stretch">
+          <div className="flex flex-row w-[90%] self-center items-stretch py-10">
             <div className="flex flex-col w-[40%] rounded-[20px] self-center">
               <div
-                className="flex w-full mt-2 md:mt-4 aspect-[10/5] md:aspect-[10/3]  rounded-[4px]"
+                className="flex w-full mt-2 md:mt-4 aspect-[10/5] md:aspect-[10/4]  rounded-[10px]"
                 style={{
                   backgroundImage: `url(/Banners/Test2.webp)`,
                   backgroundSize: "cover",
@@ -233,7 +224,7 @@ function HomePage() {
                 }}
               ></div>
               <div
-                className="flex full my-2 md:my-4 aspect-[10/5] md:aspect-[10/3]  rounded-[4px] "
+                className="flex full my-1 md:my-2 aspect-[10/5] md:aspect-[10/4]  rounded-[10px] "
                 style={{
                   backgroundImage: `url(/Banners/Test3.webp)`,
                   backgroundSize: "cover",
@@ -242,20 +233,21 @@ function HomePage() {
               ></div>
             </div>
 
-            <div className="flex flex-col h-[43vw] md:h-[26vw] w-[60%] text-justify pl-3 py-2 md:py-4 md:pl-8 ">
-              <p className="text-[16px] md:text-[24px] md:text-[34px] 2xl:text-[44px] font-bold text-black/60">
+            <div className="flex flex-col h-[43vw] md:h-auto w-[60%] text-justify pl-3 py-2 md:py-4 md:pl-8 ">
+              <HeadingButtons text="About Us" margin={0} />
+              <p className="text-base md:text-3xl 2xl:text-4xl font-bold text-[#1a4d91] tracking-wider my-6">
                 P.M Enterprise.
               </p>
-              <div className="md:mb-4 overflow-hidden ">
+              <div className="md:mb-4 overflow-hidden">
                 {AboutUs?.map((item) => (
-                  <p className="text-[12px] md:text-[18px] mb-2 text-black/50 font-normal leading-tight">
+                  <p className="text-xs md:text-sm mb-2 font-semibold text-[#0B1F3A]/80 leading-loose">
                     {item}
                   </p>
                 ))}
               </div>
               <Link
                 to={"/AboutUs"}
-                className="text-[12px] mt-1 md:text-[16px] px-2 md:px-4 py-1 border border-[#FFB720] rounded-[4px] self-start hover:bg-[#FFB720]/30"
+                className="text-xs mt-1 md:text-sm text-[#FFF] px-2 md:px-4 py-2 rounded-[4px] self-start bg-[#1a4d91] hover:bg-[#1a4d91]/80"
               >
                 ... Read More
               </Link>
