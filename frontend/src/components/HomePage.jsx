@@ -24,6 +24,7 @@ const AboutUs = [
 ];
 
 function HomePage() {
+  const isMd = window.innerWidth >= 768;
   const [TopProdData, setTopProdData] = useState([]);
   const [AllCatagory, setAllCatagory] = useState([]);
   const [Banners, setBanners] = useState([]);
@@ -140,7 +141,7 @@ function HomePage() {
           )}
 
           <div
-            className={`flex flex-col absolute h-[50%] self-end aspect-[2/1] rounded-tl-full rounded-br-full bg-gradient-to-r from-[#023e8a] via-[#023e8a]/70 to-[#023e8a]/50 z-10 justify-center items-center transition-all duration-700 ease-out ${
+            className={`flex flex-col absolute h-[60%] md:h-[50%] 2xl:h-[60%] self-end aspect-[2/1] rounded-tl-full rounded-br-full bg-gradient-to-r from-[#023e8a] via-[#023e8a]/70 to-[#023e8a]/50 z-10 justify-center items-center transition-all duration-700 ease-out ${
               containerVisible
                 ? "translate-x-0 opacity-100"
                 : "-translate-x-full opacity-0"
@@ -149,7 +150,7 @@ function HomePage() {
             {words.map((word, i) => (
               <span
                 key={word.text}
-                className={`transition-all duration-500 text-xl md:2xl lg:text-4xl 2xl:text-[74px] leading-none tracking-wide italic font-extrabold ease-in-out ${word.color} ${
+                className={`transition-all duration-500 text-sm md:text-xl md:2xl lg:text-4xl 2xl:text-[74px] 2xl:mb-6 leading-none tracking-wide italic font-extrabold ease-in-out ${word.color} ${
                   i < visibleCount
                     ? "opacity-100 translate-x-0"
                     : word.from === "left"
@@ -162,14 +163,14 @@ function HomePage() {
             ))}
 
             <Link
-              className={`flex px-2 mt-2 md:px-6 md:py-2 md:mt-4 rounded-[4px] text-sm md:text-base  bg-[#FFB720] hover:scale-[1.08] items-center text-white font-semibold transition-all duration-300 ease-out ${
+              className={`flex px-2 py-[2px] mt-2 md:px-6 md:py-2 md:mt-4 rounded-[4px] text-[10px] md:text-base 2xl:text-xl  bg-[#FFB720] hover:scale-[1.08] items-center text-white font-semibold transition-all duration-300 ease-out ${
                 buttonVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-2"
               }`}
               to={"/Catagories"}
             >
-              Explore <MoveRight className="ml-2" />
+              Explore <MoveRight className="ml-2" size={isMd? 25:14} />
             </Link>
           </div>
         </div>
@@ -186,8 +187,8 @@ function HomePage() {
         {/* Catagories Section */}
         <div className="flex flex-col bg-[#f5f5f5]">
           <HeadingButtons text="Catagories" />
-          <div className="flex flex-col items-center md:mx-[5%] my-6 md:my-10">
-            <div className="flex flex-row overflow-x-auto w-full py-[5px] no-scrollbar">
+          <div className="flex flex-col items-center mx-[5%] my-2 md:my-6">
+            <div className="flex flex-row overflow-x-auto w-full py-[5px] no-scrollbar gap-4 md:gap-6">
               {AllCatagory?.map((item) => {
                 if (item.status == true) {
                   return (
@@ -202,10 +203,10 @@ function HomePage() {
                 }
               })}
             </div>
-            <p className="flex gap-1 items-center text-[#0B1F3A] font-semibold text-xs md:text-sm my-4 md:my-8">
+            <p className="group flex gap-1 items-center text-[#0B1F3A] text-xs md:text-sm 2xl:text-base my-2 md:my-4 cursor-pointer">
               we are here to help in your business{" "}
               <span className="flex flex-row items-center text-[#FFB720]">
-                needs. <MoveUpRight />
+                needs. <MoveUpRight className="group-hover:translate-x-2 group-hover:translate-y-[-8px] duration-300" />
               </span>{" "}
             </p>
           </div>
@@ -213,10 +214,10 @@ function HomePage() {
 
         {/* About Section */}
         <div className="flex flex-col mb-3">
-          <div className="flex flex-row w-[90%] self-center items-stretch py-10">
-            <div className="flex flex-col w-[40%] rounded-[20px] self-center">
+          <div className="flex flex-col md:flex-row w-[90%] self-center items-stretch py-6">
+            <div className="flex flex-col w-full md:w-[40%] rounded-[20px] self-center gap-2 md:gap-0">
               <div
-                className="flex w-full mt-2 md:mt-4 aspect-[10/5] md:aspect-[10/4]  rounded-[10px]"
+                className="flex w-full mt-2 md:mt-4 aspect-[10/4] md:aspect-[10/4.5] 2xl:aspect-[10/3]  rounded-[10px]"
                 style={{
                   backgroundImage: `url(/Banners/Test2.webp)`,
                   backgroundSize: "cover",
@@ -224,7 +225,7 @@ function HomePage() {
                 }}
               ></div>
               <div
-                className="flex full my-1 md:my-2 aspect-[10/5] md:aspect-[10/4]  rounded-[10px] "
+                className="flex full my-1 md:my-2 aspect-[10/4] md:aspect-[10/4.5] 2xl:aspect-[10/3] rounded-[10px] "
                 style={{
                   backgroundImage: `url(/Banners/Test3.webp)`,
                   backgroundSize: "cover",
@@ -233,14 +234,14 @@ function HomePage() {
               ></div>
             </div>
 
-            <div className="flex flex-col h-[43vw] md:h-auto w-[60%] text-justify pl-3 py-2 md:py-4 md:pl-8 ">
+            <div className="flex flex-col h-auto w-full md:w-[60%] text-justify pl-3 py-2 md:py-4 md:pl-8 ">
               <HeadingButtons text="About Us" margin={0} />
               <p className="text-base md:text-3xl 2xl:text-4xl font-bold text-[#1a4d91] tracking-wider my-6">
                 P.M Enterprise.
               </p>
               <div className="md:mb-4 overflow-hidden">
                 {AboutUs?.map((item) => (
-                  <p className="text-xs md:text-sm mb-2 font-semibold text-[#0B1F3A]/80 leading-loose">
+                  <p className="text-xs md:text-sm mb-2 font-semibold text-[#0B1F3A]/80" style={{ lineHeight: "25px" }}>
                     {item}
                   </p>
                 ))}
@@ -262,10 +263,10 @@ function HomePage() {
             Products={TopProdData}
             EmptyText={"Something went wrong! PLEASE TRY AGAIN LATER"}
           />
-          <p className="flex gap-1 items-center text-[#00000f] text-xs md:text-sm mb-4 md:my-8 self-center">
+          <p className="group flex gap-1 items-center text-[#00000f] text-xs md:text-sm 2xl:text-base mb-6 md:mb-10 mt-2 md:my-4 self-center cursor-pointer">
             enjoy our most selling{" "}
             <span className="flex flex-row items-center text-[#FFB720]">
-              Top Products. <MoveUpRight />
+              Top Products. <MoveUpRight className="group-hover:translate-x-2 group-hover:translate-y-[-8px] duration-300"/>
             </span>{" "}
           </p>
         </div>
