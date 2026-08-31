@@ -5,9 +5,8 @@ import BrandShow from "./elements/BrandShow";
 import CatagoryShow from "./elements/CatagoryShow";
 import ProductShow from "./elements/ProductShow";
 import { Skeleton } from "@mui/material";
-import { MoveRight } from "lucide-react";
+import { MoveRight, MoveUpRight } from "lucide-react";
 
-import { MoveUpRight } from "lucide-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -150,7 +149,7 @@ function HomePage() {
             {words.map((word, i) => (
               <span
                 key={word.text}
-                className={`transition-all duration-500 text-sm md:text-xl md:2xl lg:text-4xl 2xl:text-[74px] 2xl:mb-6 leading-none tracking-wide italic font-extrabold ease-in-out ${word.color} ${
+                className={`transition-all duration-500 text-sm md:text-xl lg:text-4xl 2xl:text-[74px] md:mb-[-6px] 2xl:mb-6 leading-none tracking-wide italic font-extrabold ease-in-out ${word.color} ${
                   i < visibleCount
                     ? "opacity-100 translate-x-0"
                     : word.from === "left"
@@ -163,7 +162,7 @@ function HomePage() {
             ))}
 
             <Link
-              className={`flex px-2 py-[2px] mt-2 md:px-6 md:py-2 md:mt-4 rounded-[4px] text-[10px] md:text-base 2xl:text-xl  bg-[#FFB720] hover:scale-[1.08] items-center text-white font-semibold transition-all duration-300 ease-out ${
+              className={`flex px-3 py-[2px] mt-2 xl:px-6 xl:py-2 md:mt-4 rounded-[4px] text-[10px] md:text-base 2xl:text-xl  bg-[#FFB720] hover:scale-[1.08] items-center text-white font-semibold transition-all duration-300 ease-out ${
                 buttonVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-2"

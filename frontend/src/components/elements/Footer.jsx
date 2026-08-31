@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { TextField, Modal } from '@mui/material'
+import { TextField, Modal, setRef } from '@mui/material'
+import { addQuery } from '../../firebase/service/queryService'
 
 export default function Footer() {
 
@@ -61,29 +62,53 @@ const onSubmit = async() => {
     return
   }
 
-  const response = await fetch(`https://company-website-cw4n.onrender.com/Query/AddQuery`,{
-    method:"POST",
-    headers:{
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: form.name ,
-        company:form.company,
-        address:form.address,
-        state:form.state,
-        country:form.country,
-        email:form.email,
-        phone:form.phone,
-        website:form.website,
-        comment:form.query, 
-        prodquery:false,
-      })
+  const response = await addQuery({
+    name: form.name,
+    company: form.company,
+    address: form.address,
+    state: form.state,
+    country: form.country,
+    email: form.email,
+    phone: form.phone,
+    website: form.website,
+    comment: form.query,
+    prodquery: false,
   })
-  
-  if(response.status == 200){
-    setSubmitModal(true)
-    setRefresh(true)
-  }
+    .then(() => {
+      console.log("Enquiry submission successful");
+      setSubmitModal(true)
+      setRefresh(true)
+    })
+    .catch(() => {
+      console.log("Enquiry submission failed");
+      alert("Something went wrong! Please try again Later");
+    });
+
+  const Response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      access_key: process.env.REACT_APP_WEB3FORMS_ACCESS_KEY,
+      subject: "🚀 Website Enquiry",
+      from_name: "Enquiry Form",
+
+      Sender: `
+            Name:${form.name}
+            Company:${form.company}
+            Address:${form.address}
+            State:${form.state}
+            Country:${form.country}
+            Email:${form.email}
+            Phone:${form.phone}
+            Website:${form.website}
+            Comment:${form.query}
+            `,
+      product: `Normal Enquiry`,
+    }),
+  });
 
 }
 
@@ -125,9 +150,8 @@ const onSubmit = async() => {
             <div className='flex h-full'>
               <div className='flex flex-row items-center gap-2'>
                 <a href='https://www.facebook.com/share/1BG1itJMn5/' target='_blank'><img src='Logo/FB.png' className='w-[40px] aspect-square '/></a>
-                <a href='' target='_blank'><img src='Logo/Insta.png' className='w-[40px] rounded-[5px] aspect-square '/></a>
+                <a href='https://www.instagram.com/pintu.mandal.773124?igsi=NmQwOXh4YzhucGRv' target='_blank'><img src='Logo/Insta.png' className='w-[40px] rounded-[5px] aspect-square '/></a>
                 <a href='https://wa.me/919609889162' target='_blank'><img src='Logo/WP.png' className='w-[40px] rounded-[5px] aspect-square '/></a>
-                <p className='text-[#f2f2f2] hidden md:block text-lg'>PM Enterprise</p>
               </div>
             </div>
             <div className='flex h-[40px] md:h-full border border-[#f2f2f2]'></div>
