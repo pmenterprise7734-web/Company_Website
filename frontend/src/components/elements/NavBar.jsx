@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 import { Menu as MenuIcon, House, Info, Images } from 'lucide-react';
@@ -8,6 +8,23 @@ import MenuItem from '@mui/material/MenuItem';
 export default function NavBar() {
 
   const [anchorEl, setAnchorEl] = useState(null)
+  const[scrolled,setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY>80)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  },[])
+
+
+
+
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -19,9 +36,10 @@ export default function NavBar() {
 
 
   return (
-    <div className='flex flex-row w-full h-[10vh] justify-between'>
+  <div className='md:fixed z-50 top-0 flex w-full justify-center'>
+    <div className={`flex flex-row h-[10vh] md:bg-white/50 md:backdrop-blur-lg justify-between transition-all duration-500 ease-in-out ${scrolled? "md:mt-2 md:w-[80%] md:rounded-[30px] shadow-[0_8px_25px_rgba(0,0,0,0.25)]":" w-full"}`}>
       <div className='flex w-[80%] lg:w-[40%] h-full items-center'>
-        <Link to={'/'} className='h-[90%] full ml-[5%]'>
+        <Link to={'/'} className={`h-[90%] transition-all ease-in-out duration-400 ${scrolled? "ml-[12%]":"ml-[5%]"}`}>
           <img src='/Logo/PMlogo.png' className='h-full w-full' />
         </Link>
       </div>
@@ -56,7 +74,7 @@ export default function NavBar() {
         </Menu>
       </div>
 
-      <div className='hidden lg:flex w-[30%] lg:w-[60%] h-full bg-[#1B1A1C] rounded-bl-[10px] justify-between border-b border-[#c4c4c4] '>
+      <div className={`hidden lg:flex w-[30%] lg:w-[60%] h-full justify-between border-b border-[#c4c4c4] transition-all ease-in-out duration-400 ${scrolled? "bg-[#1B1A1C] backdrop-blur-md rounded-[30px]":"bg-[#1B1A1C] rounded-l-[10px]"} `}>
         <div className='flex flex-row w-[55%] h-full justify-around items-center ml-10'>
             <NavLink to={'/'} className={({isActive}) => `text-[#f2f2f2] hover:scale-110 hover:text-[#FFF] duration-200 cursor-pointer ${isActive? "font-bold underline underline-offset-4 decoration-2 hover:scale-100":""}`} >Home</NavLink>
             <NavLink to={'/Catagories'} className={({isActive}) => `text-[#f2f2f2] hover:scale-110 hover:text-[#FFF] duration-200 cursor-pointer ${isActive? "font-bold underline underline-offset-4 decoration-2 hover:scale-100":""}`}>Catagories</NavLink>
@@ -64,11 +82,12 @@ export default function NavBar() {
             <NavLink to={'/Gallery'} className={({isActive}) => `text-[#f2f2f2] hover:scale-110 hover:text-[#FFF] duration-200 cursor-pointer ${isActive? "font-bold underline underline-offset-4 decoration-2 hover:scale-100":""}`}>Gallery</NavLink>
         </div>
         <div className='flex w-[30%] h-full justify-around items-center '>
-            <Link to={'/'} className='flex justify-center items-center bg-[#FFB720] hover:scale-[1.02] duration-100 rounded-[2px] px-3 py-1'>
+            <Link to={'/'} className='flex justify-center items-center bg-[#FFB720] hover:scale-[1.02] duration-100 rounded-[4px] px-3 py-1'>
                 <p className='text-[#fff] font-medium'>contact us</p>
             </Link>
         </div>
       </div>
     </div>
+  </div>
   )
 }

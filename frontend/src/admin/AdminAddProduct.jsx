@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getCategories } from "../firebase/service/categoryService";
 import { addProduct, updateProduct } from "../firebase/service/productService";
 import { uploadImage } from "../firebase/service/storageService";
+import {CompressImage} from './components/CompressImage'
 
 export default function AdminAddProduct() {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function AdminAddProduct() {
     GetAllCatagory();
     if (data) {
       setNewProduct(true);
-      console.log(data.name);
+      // console.log(data.name);
       setName(data.name);
       setCapacity(data.capacity);
       setCatagory(data.catagory);
@@ -131,12 +132,14 @@ export default function AdminAddProduct() {
       return;
     }
 
+    const OptimizedFile = await CompressImage(selectedFile)
+
     //preview for image to be uploaded
-    const previewUrl = URL.createObjectURL(selectedFile);
+    const previewUrl = URL.createObjectURL(OptimizedFile);
     setPreviewImg(previewUrl);
 
     try {
-      const downloadUrl = await uploadImage(selectedFile, "products");
+      const downloadUrl = await uploadImage(OptimizedFile, "products");
 
       setImg(downloadUrl);
 

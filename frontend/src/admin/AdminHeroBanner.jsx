@@ -3,6 +3,7 @@ import { Modal } from '@mui/material'
 import { ImagePlus,Trash2 } from 'lucide-react';
 import {uploadImage} from '../firebase/service/storageService'
 import { getAllBanners, addBanner, deleteBanner } from '../firebase/service/bannerService';
+import {CompressImage} from './components/CompressImage'
 
 
 export default function AdminHeroBanner() {
@@ -34,7 +35,7 @@ export default function AdminHeroBanner() {
     }
 
 
-    const ImageSelection = (e) => {
+    const ImageSelection = async(e) => {
         console.log(e)
         const selectedFile = e.target.files[0]
 
@@ -42,9 +43,10 @@ export default function AdminHeroBanner() {
             alert("Please select en image")
             return;
         }
+        const OptimizedFile = await CompressImage(selectedFile,1)
 
-        setSelFile(selectedFile)
-        const previewUrl = URL.createObjectURL(selectedFile)
+        setSelFile(OptimizedFile)
+        const previewUrl = URL.createObjectURL(OptimizedFile)
         setPreviewUrl(previewUrl)        
     }
 

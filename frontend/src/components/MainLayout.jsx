@@ -7,7 +7,9 @@ function MainLayout() {
   return (
     <div>
         <NavBar/>
-        <Outlet/>
+        <main className='md:mt-[10vh]'>
+          <Outlet/>
+        </main>
         <Footer/>
     </div>
   )

@@ -5,6 +5,7 @@ import { Link} from 'react-router-dom'
 
 import { getCategories, addCategory, changeVisibility } from '../firebase/service/categoryService'
 import { uploadImage } from '../firebase/service/storageService'
+import {CompressImage} from './components/CompressImage'
 
 
 export default function AdminViewAllCatagories() {
@@ -122,11 +123,12 @@ export default function AdminViewAllCatagories() {
         } 
 
         //preview for image to be uploaded
-        const previewUrl = URL.createObjectURL(selectedFile)
+        const OptimizedFile = await CompressImage(selectedFile)
+        const previewUrl = URL.createObjectURL(OptimizedFile)
         setPreviewImg(previewUrl)
 
         try {
-          const downloadUrl = await uploadImage(selectedFile, "categories");
+          const downloadUrl = await uploadImage(OptimizedFile, "categories");
 
           setCatagoryImg(downloadUrl);
 
