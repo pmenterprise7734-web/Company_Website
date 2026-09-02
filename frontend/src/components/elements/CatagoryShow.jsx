@@ -12,7 +12,7 @@ export default function CatagoryShow({Name, Image, Value, BName}) {
           {/* <div className="h-[2px] w-10 bg-[#FFB720]"></div> */}
           <Link
             className={`group flex rounded-[4px] items-center tracking-widest text-[10px] md:text-xs 2xl:text-sm text-[#FFB720] leading-none font-semibold hover:scale-[1.05] transition-all duration-200 ease-out`}
-            to={`/ProductList?value=${Value}&bname=${BName}`}
+            to={`/ProductList?value=${Value}&bname=${BName}&catagory=${Name}`}
           >
             Explore <MoveRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" />
           </Link>

@@ -37,7 +37,7 @@ export default function NavBar() {
 
   return (
   <div className='md:fixed z-50 top-0 flex w-full justify-center'>
-    <div className={`flex flex-row h-[10vh] md:bg-white/50 md:backdrop-blur-lg justify-between transition-all duration-500 ease-in-out ${scrolled? "md:mt-2 md:w-[80%] md:rounded-[30px] shadow-[0_8px_25px_rgba(0,0,0,0.25)]":" w-full"}`}>
+    <div className={`flex flex-row h-[10vh] md:bg-white/50 md:backdrop-blur-lg justify-between transition-all duration-500 ease-in-out ${scrolled? "md:mt-2 md:w-[85%] md:rounded-[30px] shadow-[0_8px_25px_rgba(0,0,0,0.25)]":" w-full"}`}>
       <div className='flex w-[80%] lg:w-[40%] h-full items-center'>
         <Link to={'/'} className={`h-[90%] transition-all ease-in-out duration-400 ${scrolled? "ml-[12%]":"ml-[5%]"}`}>
           <img src='/Logo/PMlogo.png' className='h-full w-full' />

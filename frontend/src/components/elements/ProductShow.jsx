@@ -16,7 +16,7 @@ import {
 
 import useWeb3Forms from "@web3forms/react"
 
-export default function ProductShow({Products, EmptyText}) {
+export default function ProductShow({Products, EmptyText, page}) {
 
   const isMd = window.innerWidth >= 768;
   const[ConfirmationModal, setConfirmationModal] = useState(false)
@@ -144,13 +144,13 @@ export default function ProductShow({Products, EmptyText}) {
   }
 
   return (
-    <div className="flex flex-row flex-wrap justify-around md:justify-start md:gap-6 2xl:gap-10 mt-6 md:mx-[5%] w-full">
+    <div className={`flex flex-row flex-wrap justify-around md:justify-start md:gap-6 2xl:gap-10 ${page === "Products"? "mt-0":"mt-6"} md:mx-[5%] w-full`}>
       {Products && Products.length > 0 ? (
         Products.map((item) => {
           return (
             <div
               key={item._id}
-              className="flex flex-col w-[45%] md:w-[23%] 2xl:w-[18%] aspect-[4/6] md:aspect-[4/5] border-2 border-[#FFB720] rounded-[10px] my-2 "
+              className={`flex flex-col ${page === "Products"? "w-[48%] md:w-[27%] 2xl:w-[20%]":"w-[45%] md:w-[23%] 2xl:w-[18%]"} aspect-[4/6] md:aspect-[4/5] border-2 border-[#FFB720] rounded-[10px] my-2 `}
             >
               <div
                 className="flex flex-col h-[70%] w-[full] rounded-t-[9px]"
