@@ -23,6 +23,12 @@ export default function NavBar() {
   },[])
 
 
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
 
 
   const open = Boolean(anchorEl)
@@ -81,10 +87,10 @@ export default function NavBar() {
             <NavLink to={'/AboutUs'} className={({isActive}) => `text-[#f2f2f2] hover:scale-110 hover:text-[#FFF] duration-200 cursor-pointer ${isActive? "font-bold underline underline-offset-4 decoration-2 hover:scale-100":""}`}>About Us</NavLink>
             <NavLink to={'/Gallery'} className={({isActive}) => `text-[#f2f2f2] hover:scale-110 hover:text-[#FFF] duration-200 cursor-pointer ${isActive? "font-bold underline underline-offset-4 decoration-2 hover:scale-100":""}`}>Gallery</NavLink>
         </div>
-        <div className='flex w-[30%] h-full justify-around items-center '>
-            <Link to={'/'} className='flex justify-center items-center bg-[#FFB720] hover:scale-[1.02] duration-100 rounded-[4px] px-3 py-1'>
+        <div className='flex w-[30%] h-full justify-around items-center'>
+            <div className='flex justify-center items-center bg-[#FFB720] hover:scale-[1.04] duration-100 rounded-[4px] px-3 py-1 cursor-pointer' onClick={() => {scrollToContact()}}>
                 <p className='text-[#fff] font-medium'>contact us</p>
-            </Link>
+            </div>
         </div>
       </div>
     </div>

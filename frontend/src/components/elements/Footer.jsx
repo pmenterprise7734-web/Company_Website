@@ -118,7 +118,7 @@ const onSubmit = async() => {
       <div className='flex w-full md:w-[60%] lg:w-[50%] justify-center items-center'>
         <div className='flex flex-col w-[98%] md:w-[80%] border-2 gap-2 border-[#8f8f8f] px-6 py-6 my-10 rounded-[20px] justify-center items-center'>
           
-          <div className='grid grid-cols-6 gap-4 p-2'>
+          <div className='grid grid-cols-6 gap-4 p-2' id='contact'>
             <TextField label="Name" fullWidth sx={whiteStyles} className='col-span-3' value={form.name} required onChange={(e) => setForm({...form, name:e.target.value})}/>
             <TextField label="Company" fullWidth sx={whiteStyles} className='col-span-3' value={form.company} onChange={(e) => setForm({...form, company :e.target.value})}/>
             <TextField label="Address" fullWidth sx={whiteStyles} className='col-span-6' value={form.address} multiline maxRows={2} onChange={(e) => setForm({...form, address :e.target.value})}/>

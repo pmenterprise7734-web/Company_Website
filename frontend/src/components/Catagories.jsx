@@ -31,6 +31,13 @@ export default function Catagories() {
     }
   };
 
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
+
   return (
     <div className="min-h-screen bg-[#F7F9FC] overflow-x-hidden">
 
@@ -76,7 +83,7 @@ export default function Catagories() {
       </section>
 
       {/* CARDS */}
-      <section className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-12">
+      <section className="max-w-[90%] mx-auto md:px-6 py-6 md:py-12">
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 md:gap-6">
           {AllCatagory?.map((item) => {
              if (item.status == true) {
@@ -107,7 +114,7 @@ export default function Catagories() {
               </p>
             </div>
 
-            <button className="bg-[#071B3A] text-white px-8 py-4 rounded-2xl">
+            <button className="bg-[#071B3A] text-white px-8 py-4 rounded-2xl" onClick={() => scrollToContact()}>
               Contact Our Experts →
             </button>
           </div>

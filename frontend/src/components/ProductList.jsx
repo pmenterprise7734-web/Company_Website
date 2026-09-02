@@ -34,7 +34,13 @@ export default function ProductList() {
     }
   }; 
 
-  console.log(filteredProducts)
+  // console.log(filteredProducts)
+
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
 
   
 
@@ -77,7 +83,7 @@ export default function ProductList() {
 
       {/* PRODUCTS WRAPPER */}
       <section className="w-[95%] md:w-[85%] mx-auto md:px-4 md:px-0 -mt-12 relative z-20">
-        <div className="bg-white rounded-[10px] md:rounded-[30px] shadow-lg border border-slate-100 md:p-5 md:p-8">
+        <div className="bg-white rounded-[10px] md:rounded-[30px] shadow-lg border border-slate-100 pb-6 md:p-8">
           {/* FILTERS */}
           <div className="flex flex-col lg:flex-row justify-between mb-2 p-5 gap-5 md:mb-8">
             <div>
@@ -144,7 +150,7 @@ export default function ProductList() {
 
                 <div className="w-14 h-1 bg-[#F5B61A] mt-5 mb-8" />
 
-                <button className="bg-[#0B1F3A] text-white px-8 py-4 rounded-xl font-medium hover:scale-105 transition">
+                <button className="bg-[#0B1F3A] text-white px-8 py-4 rounded-xl font-medium hover:scale-105 transition" onClick={() => scrollToContact()}>
                   Contact Us →
                 </button>
               </div>
